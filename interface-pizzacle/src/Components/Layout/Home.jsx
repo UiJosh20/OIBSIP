@@ -2,7 +2,16 @@
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <main>
+        <div className="motto">
+            <h1>Pizza at it's overall pinnacle</h1>
+        </div>
+        <div>
+
+        </div>
+      </main>
+    </>
   )
 }
 
