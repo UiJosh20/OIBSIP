@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const Navbar = () => {
 
@@ -20,24 +20,25 @@ const Navbar = () => {
       pathname: "Get yours now"
     }
   ]
+
   return (
     <>
-      <nav className="flex justify-between border border-red-300">
+      <nav className=" border-t-2 border-green-700 bg-black text-white">
         <div>
           <h5>LOGO</h5>
         </div>
-        <div className="border border-red-300">
+          <ul className="border border-white p-10 !text-white">
             {
-              Navlink.map((links, i)=>{
+              Navlink.map((item, i)=>{
                 <div key={i} >
-                <NavLink to={links.path}>
-                  {links.pathname}
-                </NavLink>
+                  <NavLink to={item.path} className="text-white">
+                    {item.pathname}
+                  </NavLink>
                 </div>
-
               })
             }
-        </div>
+          </ul>
+    
       </nav>
     </>
   )
