@@ -19,7 +19,7 @@ export const UserLogin = () => {
     
         const { handleChange, handleSubmit, values, errors } = useFormik({
             initialValues: {
-                matricNumber: "",
+                email: "",
                 password: "",
             },
             validationSchema: userLoginSchema,
@@ -56,7 +56,7 @@ export const UserLogin = () => {
   return (
     <>
       <section className="flex justify-center bg-black h-screen border-t-2 border-green-700">
-                    <main className="lg:m-20 shadow-md  text-white lg:rounded-lg px-4 pt-2 w96">
+                    <main className="lg:m-20 shadow-md  text-white lg:rounded-lg px-4 pt-2 w-96">
                         <Link to='/' className="material-symbols-outlined text-green-500 text-4xl cursor-pointer">
                             home
                         </Link>
@@ -76,16 +76,16 @@ export const UserLogin = () => {
                             )}
                         </div>
                         <div className="px-5">
-                            {(errors.matricNumber || errors.password) && (
+                            {(errors.email || errors.password) && (
                                 <Alert sx={{ width: "100%" }} severity="warning">
-                                    {errors.matricNumber || errors.password}
+                                    {errors.email || errors.password}
                                 </Alert>
                             )}
     
                         </div> */}
-                        <form onSubmit={handleSubmit} className="lg:p-5 p-5">
+                        <form onSubmit={handleSubmit} className="lg:p-2 p-5">
                             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
-                                <input type="text" placeholder='Matric Number' onChange={handleChange} name="matricNumber" value={values.matricNumber} className="w-full bg-none outline-none text-black" />
+                                <input type="email" placeholder='Email Address' onChange={handleChange} name="email" value={values.email} className="w-full bg-none outline-none text-black" />
                                 <span className="material-symbols-outlined text-black">
                                     person
                                 </span>

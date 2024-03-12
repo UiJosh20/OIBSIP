@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { RegisterSchema } from "../../Schema/UserAdminRegisterSchema"
 import { Link } from "react-router-dom";
-// import Alert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 
 
 
@@ -50,18 +50,18 @@ const UserRegister = () => {
   });
   return (
     <>
-      <section className="flex justify-center bg-black h-screen lg:p-10 w-full">
-        <main className=" shadow-md bg-white  text-black lg:rounded-lg w96 lg:py-3">
-          <h1 className="lg:py-5 font-bold lg:text-3xl text-center lg:block hidden w-full text-black">Create Account</h1>
-          <p className="pt-5 font-bold text-2xl text-center lg:hidden mt-10 mb-7 text-black">Create Account</p>
+      <section className="flex justify-center bg-black h-screen lg:p-10 w-full border-t-2 border-green-300">
+        <main className=" shadow-md bg-black text-white lg:rounded-lg w-96 lg:py-3">
+          <h1 className="lg:py-5 font-bold lg:text-3xl text-center lg:block hidden w-full text-white">Create Account</h1>
+          <p className="pt-5 font-bold text-2xl text-center lg:hidden mt-10 mb-7 text-white">Create Account</p>
           <div className="px-5">
-            {/* {(errors.firstName || errors.lastName || errors.email || errors.password) && (
+             {(errors.firstName || errors.lastName || errors.email || errors.password) && (
               <Alert sx={{ width: "100%" }} severity="warning">
                 {errors.firstName || errors.lastName || errors.email || errors.password}
               </Alert>
-            )} */}
+            )} 
           </div>
-          <form onSubmit={handleSubmit} className="lg:p-5 p-5">
+          <form onSubmit={handleSubmit} className="lg:p-5 px-2">
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
               <input
                 type="text"
