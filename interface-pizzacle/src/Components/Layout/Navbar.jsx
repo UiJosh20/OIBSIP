@@ -1,44 +1,23 @@
+// import { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 
 const Navbar = () => {
-
-  const Navlink = [
-    {
-      path: "/About",
-      pathname: "About"
-    },
-    {
-      path: "/News",
-      pathname: "News"
-    },
-    {
-      path: "/user/register",
-      pathname: "SignUp"
-    },
-    {
-      path: "/user/login",
-      pathname: "Get yours now"
-    }
-  ]
+// const [first, setfirst] = useState()
 
   return (
     <>
-      <nav className=" border-t-2 border-green-700 bg-black text-white">
+      <nav className=" flex lg:px-20 lg:py-4 items-center justify-between border-t-2 border-green-700 bg-black text-white fixed w-full">
         <div>
           <h5>LOGO</h5>
         </div>
-          <ul className="border border-white p-10 !text-white">
-            {
-              Navlink.map((item, i)=>{
-                <div key={i} >
-                  <NavLink to={item.path} className="text-white">
-                    {item.pathname}
-                  </NavLink>
-                </div>
-              })
-            }
-          </ul>
-    
+        <ul className="flex gap-7">
+          <Link to='/about'>About</Link>
+          <Link to='/product'>Our product</Link>
+          <Link to='/user/register'>Join Us</Link>
+          <Link to='/user/login'>Get yours now</Link>
+
+        </ul>
+
       </nav>
     </>
   )
