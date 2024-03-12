@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-
-const URI = 'mongodb+srv://pizzacle1:<password>@cluster0.ycbpqb5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+require('dotenv').config()
+const URI = process.env.URL
 
 mongoose.connect(URI)
 .then((response)=>{
-    console.log(response)
+    console.log("Database is connected successfully")
 })
 .catch((err)=>{
-    console.error("issue with database");
+    console.error(err);
 })
 
 let userSchema = mongoose.Schema({
