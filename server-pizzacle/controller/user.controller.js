@@ -12,7 +12,7 @@ const generateVerificationToken = () =>{
     return crypto.randomBytes(32).toString('hex')
 }
 const generateVerificationTokenLink = (verificationToken) =>{
-    return `http://localhost:3000/api/v1/user/verify/${verificationToken}`
+    return `http://localhost:3000/user/verify/${verificationToken}`
 }
 
 const verificationToken = generateVerificationToken()
@@ -50,7 +50,7 @@ const sendVerificationToEmail = (email) => {
             from: MAILEREMAIL,
             to: email,
             subject: 'Verify your email address',
-            text: `click on the link to verify your email <p>${verificationTokenLink}</p>`
+            text: `click on the link to verify your email ${verificationTokenLink}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
@@ -63,8 +63,35 @@ const sendVerificationToEmail = (email) => {
     });
 }
 
+const verifyEmailFromTokenLink = (req, res) =>{
+    const {token} = req.params.verificationToken;
+
+    userModel.findOne({token})
+    .then((user) => {
+        if (user) {
+            user.isVerified = true;
+            return user.save();
+        } else {
+            res.status(404).json({ message: "Invalid token" });
+        }
+    })
+    .then(() => {
+        res.json(`<p>Your email has been verified successfully. You can go back to your app and login now.</p>`);
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    });
+}
+
+
+const userLogin = (res, req) =>{
+
+}
 
 module.exports = {
     userRegister,
+    userLogin,
+    verifyEmailFromTokenLink,
     
 }
