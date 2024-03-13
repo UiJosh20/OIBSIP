@@ -40,7 +40,9 @@ const UserRegister = () => {
         axios.post(URL, values)
           .then((response) => {
             if (response.data.status == 200) {
-              
+              navigate(
+                "/user/verifyEmail"
+              )
             } else {
               navigate("/user/signup");
             }

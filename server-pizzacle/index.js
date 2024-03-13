@@ -4,6 +4,7 @@ const userRouter = require("./routes/user.route")
 require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
+console.log(__dirname)
 
 app.use(cors())
 app.use(express.urlencoded({extended:true}))

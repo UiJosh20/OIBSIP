@@ -4,6 +4,8 @@ const crypto = require('crypto')
 const MAILEREMAIL = process.env.MAILEREMAIL
 const MAILERPASS = process.env.MAILERPASS
 
+
+
 const generateOTP = () => {
     return Math.floor(100000 + Math.random() * 900000);
 };
@@ -76,7 +78,7 @@ const verifyEmailFromTokenLink = (req, res) =>{
         }
     })
     .then(() => {
-        res.json(`<p>Your email has been verified successfully. You can go back to your app and login now.</p>`);
+        res.sendfile('/home/dr-anonymous/Desktop/PROJECTS/pizzacle/server-pizzacle/views/index.html');
     })
     .catch((error) => {
         console.error(error);
