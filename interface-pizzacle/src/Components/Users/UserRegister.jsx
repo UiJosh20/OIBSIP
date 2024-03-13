@@ -10,7 +10,6 @@ import Alert from '@mui/material/Alert';
 const UserRegister = () => {
 
   const URL = "http://localhost:3000/user/register";
-  const verifyUrl = "http://localhost:3000/user/verify/:verificationToken"
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);

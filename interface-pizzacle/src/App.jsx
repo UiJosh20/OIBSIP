@@ -9,6 +9,7 @@ import { UserLogin } from './Components/Users/UserLogin'
 import AdminLayout from './Components/Admin/AdminLayout'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import AdminLogin from './Components/Admin/AdminLogin'
+import ConfirmEmail from './Components/Users/ConfirmEmail'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         {/* user page */}
         <Route path='/user/register' element={<UserRegister />} />
         <Route path='/user/login' element={<UserLogin />} />
+        <Route path='/user/verifyEmail' element={<ConfirmEmail />} />
 
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
