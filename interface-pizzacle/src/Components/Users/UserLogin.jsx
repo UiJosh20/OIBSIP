@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { userLoginSchema } from "../../Schema/UserLoginSchema";
 import { useState } from "react";
-// import Alert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 
 export const UserLogin = () => {
      const URL = "http://localhost:3000/user/login";
@@ -63,7 +63,7 @@ export const UserLogin = () => {
     
                         <h1 className="text-center w-full font-bold text-xl text-white-300 lg:block hidden pb-3">Login</h1>
                         <h1 className="text-center w-full mt-20 mb-10 font-bold text-2xl text-black lg:hidden">Login</h1>
-                        {/* <div className="px-5">
+                        <div className="px-5">
                             {loginSuccess && (
                                 <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                                     Logged in successfully
@@ -82,7 +82,7 @@ export const UserLogin = () => {
                                 </Alert>
                             )}
     
-                        </div> */}
+                        </div> 
                         <form onSubmit={handleSubmit} className="lg:p-2 p-5">
                             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
                                 <input type="email" placeholder='Email Address' onChange={handleChange} name="email" value={values.email} className="w-full bg-none outline-none text-black" />
