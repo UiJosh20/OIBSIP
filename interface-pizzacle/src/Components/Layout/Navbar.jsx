@@ -6,11 +6,11 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=" flex lg:px-20 lg:py-4 items-center justify-between border-t-2 border-green-700 bg-black text-white fixed w-full z-50">
+      <nav className=" flex lg:px-10 lg:py-4 items-center justify-between border-t-2 border-green-700 bg-black text-white fixed w-full z-50">
         <div>
-          <h5>LOGO</h5>
+          <h5>PIZZACLE</h5>
         </div>
-        <ul className="flex gap-7 list-none items-center">
+        <ul className="flex gap-12 list-none items-center">
           <Link to='/about'>About</Link>
           <Link to='/product'>Our product</Link>
           <Link to='/user/register'>Join Us</Link>
