@@ -19,7 +19,7 @@ const AdminLogin = () => {
     
         const { handleChange, handleSubmit, values, errors } = useFormik({
             initialValues: {
-                email: "",
+                adminId: "",
                 password: "",
             },
             validationSchema: adminLoginSchema,
@@ -72,16 +72,16 @@ const AdminLogin = () => {
                             )}
                         </div>
                         <div className="px-5">
-                            {(errors.email || errors.password) && (
+                            {(errors.adminId || errors.password) && (
                                 <Alert sx={{ width: "100%" }} severity="warning">
-                                    {errors.email || errors.password}
+                                    {errors.adminId || errors.password}
                                 </Alert>
                             )}
     
                         </div> 
                         <form onSubmit={handleSubmit} className="lg:p-2 p-5">
                             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
-                                <input type="text" placeholder='Admin ID' onChange={handleChange} name="email" value={values.email} className="w-full bg-none outline-none text-black" />
+                                <input type="text" placeholder='Admin ID' onChange={handleChange} name="adminId" value={values.adminId} className="w-full bg-none outline-none text-black" />
                                 <span className="material-symbols-outlined text-black">
                                     person
                                 </span>

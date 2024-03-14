@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 const adminModel = require("../model/admin.model");
 
 const generateOTP = () => {
@@ -9,27 +10,74 @@ const otpExpiration = new Date(Date.now() + 30 * 60 * 1000);
 const adminId = "admin1234";
 const password = "password1234";
 
-// Hash the password
-bcrypt.hash(password, 10)
-  .then(hashedPassword => {
-    // Create a new admin with hashed password
-    const admin = new adminModel({ adminId, password: hashedPassword, otp, otpExpiration });
 
-    // Save the admin to the database
-    admin.save()
-      .then((result) => {
-        console.log("Admin saved successfully");
-      })
-      .catch((err) => {
-        console.log("Couldn't save admin:", err);
+adminModel.findOne({ adminId })
+  .then(existingAdmin => {
+    if (!existingAdmin) {
+
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) {
+          console.error("Error hashing password:", err);
+          return;
+        }
+        const admin = new adminModel({
+          adminId,
+          password: hashedPassword,
+          otp,
+          otpExpiration
+        });
+        admin.save()
+          .then(() => {
+            console.log("Admin saved successfully");
+          })
+          .catch((err) => {
+            console.log("Couldn't save admin:", err);
+          });
       });
+    } else {
+      console.log("Admin already exists");
+    }
   })
-  .catch(error => {
-    console.error("Error hashing password:", error);
+  .catch((err) => {
+    console.log("Error checking existing admin:", err);
   });
 
 const adminLogin = (req, res) => {
   console.log(req.body);
+  let { adminId, password } = req.body;
+
+  adminModel.findOne({ adminId })
+  .then((admin) => {
+    if (!admin) {
+      console.log("user not found");
+      res.send({ message: "admin not found", adminExist: false });
+    } else {
+      bcrypt.compare(password, admin.password, (err, match) => {
+        console.log(match);
+        if (err) {
+          console.log("Error comparing passwords:", err);
+          return res.status(500).json({ message: "Internal Server Error" });
+        }
+        if (!match) {
+          console.log("Incorrect password");
+          return res.status(401).send({ message: "Incorrect password" });
+        } else {
+          const token = jwt.sign({ adminId }, secret, { expiresIn: "1h" });
+          console.log("User signed in successfully");
+          res.send({
+            message: "User signed in successfully",
+            status: true,
+            user: user,
+            token: token,
+          });
+        }
+      });
+    }
+  })
+  .catch((err) => {
+    console.error("Error finding user:", err);
+    res.status(500).send({ message: "Internal server error" });
+  });
 };
 
 module.exports = {
