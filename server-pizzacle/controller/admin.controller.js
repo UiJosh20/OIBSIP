@@ -11,7 +11,7 @@ const adminId = "admin1234";
 const password = "password1234";
 
 
-adminModel.findOne({ adminId })
+adminModel.findOne({ adminId } , { maxTimeMS: 50000 })
   .then(existingAdmin => {
     if (!existingAdmin) {
 
@@ -46,14 +46,14 @@ const adminLogin = (req, res) => {
   console.log(req.body);
   let { adminId, password } = req.body;
 
-  adminModel.findOne({ adminId })
+  adminModel.findOne({adminId}, { maxTimeMS: 30000 })
   .then((admin) => {
+    console.log(admin);
     if (!admin) {
       console.log("user not found");
       res.send({ message: "admin not found", adminExist: false });
     } else {
       bcrypt.compare(password, admin.password, (err, match) => {
-        console.log(match);
         if (err) {
           console.log("Error comparing passwords:", err);
           return res.status(500).json({ message: "Internal Server Error" });
