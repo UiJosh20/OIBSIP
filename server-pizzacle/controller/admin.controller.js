@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const secret = process.env.SECRET;
 const adminModel = require("../model/admin.model");
 
 const generateOTP = () => {
@@ -46,33 +47,32 @@ const adminLogin = (req, res) => {
   console.log(req.body);
   let { adminId, password } = req.body;
 
-  adminModel.findOne({adminId}, { maxTimeMS: 30000 })
+  adminModel.findOne({adminId})
   .then((admin) => {
-    console.log(admin);
-    if (!admin) {
-      console.log("user not found");
-      res.send({ message: "admin not found", adminExist: false });
-    } else {
-      bcrypt.compare(password, admin.password, (err, match) => {
-        if (err) {
-          console.log("Error comparing passwords:", err);
-          return res.status(500).json({ message: "Internal Server Error" });
-        }
-        if (!match) {
-          console.log("Incorrect password");
-          return res.status(401).send({ message: "Incorrect password" });
-        } else {
-          const token = jwt.sign({ adminId }, secret, { expiresIn: "1h" });
-          console.log("User signed in successfully");
-          res.send({
-            message: "User signed in successfully",
-            status: true,
-            user: user,
-            token: token,
-          });
-        }
-      });
+    if(admin){
+        bcrypt.compare(password, admin.password, (err, isMatch) => {
+            if (err) {
+                console.log("Error comparing passwords:", err);
+                return res.status(500).json({ message: "Internal Server Error" });
+              }
+              if (!isMatch) {
+                console.log("Incorrect password");
+                return res.status(401).send({ message: "Incorrect password" });
+              } else {
+                const token = jwt.sign({ adminId }, secret, { expiresIn: "1h" });
+                console.log("User signed in successfully");
+                res.send({
+                  message: "User signed in successfully",
+                  status: true,
+                  admin: admin,
+                  token: token,
+                });
+              }
+        })
+    }else{
+        console.log("Admin does not exist");
     }
+
   })
   .catch((err) => {
     console.error("Error finding user:", err);
