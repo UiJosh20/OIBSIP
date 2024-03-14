@@ -8,5 +8,26 @@
 }
 
 .motto h1{
-    font-size: 40px;
+    font-size: 60px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+.homelink:hover{
+    color: rgb(1, 194, 81);
+}
+
+.spin{
+    animation: spin 6s infinite ease-in;
+}
+
+
+@keyframes spin {
+    0%, 100%{
+        transform: rotate(0deg);
+    }
+
+    50%{
+        transform: rotate(-2deg);
+    }
+}
+
