@@ -31,3 +31,11 @@
     }
 }
 
+
+input::placeholder{
+    font-size: 12px;
+}
+th{
+    font-size: 13px;
+}
+
