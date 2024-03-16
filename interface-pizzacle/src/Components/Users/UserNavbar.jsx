@@ -9,7 +9,7 @@ const UserNavbar = () => {
     </nav>
     <nav className="shadow-md lg:py-3 lg:px-10 flex justify-between items-center sticky top-0 bg-white">
       <div>
-        <h1>PIZZACLE</h1>
+        <h1 className="logop">PIZZACLE</h1>
       </div>
       <div className="flex items-center gap-2">
         <div className="border-2 border-gray-200 rounded-md px-5">
