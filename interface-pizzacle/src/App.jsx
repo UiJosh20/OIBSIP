@@ -10,6 +10,7 @@ import AdminLayout from './Components/Admin/AdminLayout'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import AdminLogin from './Components/Admin/AdminLogin'
 import ConfirmEmail from './Components/Users/ConfirmEmail'
+import Product from './Components/Users/Product'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
 
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
+          <Route path='/user/product' element={<Product />} />
           <Route path='/user/dashboard' element={<UserDashboard />} />
         </Route>
 
