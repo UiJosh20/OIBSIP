@@ -10,7 +10,8 @@ import AdminLayout from './Components/Admin/AdminLayout'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import AdminLogin from './Components/Admin/AdminLogin'
 import ConfirmEmail from './Components/Users/ConfirmEmail'
-import Product from './Components/Users/Product'
+import Product from './Components/Layout/Product'
+
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Landing />} >
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/product' element={<Product />} />
         </Route>
 
         {/* user page */}
@@ -31,7 +33,6 @@ function App() {
 
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
-          <Route path='/user/product' element={<Product />} />
           <Route path='/user/dashboard' element={<UserDashboard />} />
         </Route>
 

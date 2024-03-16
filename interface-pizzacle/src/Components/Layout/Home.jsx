@@ -10,7 +10,7 @@ const Home = () => {
           <h1>Pizza at it's overall pinnacle</h1>
           <p>We deliver anywhere, with an all-round speed...</p>
 
-          <Link to='/user/product'>
+          <Link to='/product'>
           <button  className="bg-green-800 p-3 rounded-md mt-3 w-80">Order now</button>
           </Link>
         </div>
