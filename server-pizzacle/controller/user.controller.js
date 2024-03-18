@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const { log } = require("console");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
@@ -25,8 +24,8 @@ const verificationTokenLink = generateVerificationTokenLink(verificationToken);
 const userRegister = (req, res) => {
   const otp = generateOTP();
   const otpExpiration = new Date(Date.now() + 30 * 60 * 1000);
-  const users = new userModel({ ...req.body, otp, otpExpiration });
   const { email } = req.body;
+  const users = new userModel({ ...req.body, otp, otpExpiration });
   users
     .save()
     .then(() => {
@@ -139,7 +138,7 @@ const userLogin = (req, res) => {
     .findOne({ email })
     .then((user) => {
       console.log(user)
-      bcrypt.compare(password, user.password, (err, match) => {
+      bcrypt.compare(password, user.password, (match, err) => {
             console.log(match);
             if (err) {
               console.log("Error comparing passwords:", err);
@@ -147,31 +146,31 @@ const userLogin = (req, res) => {
             }
           })
 
-      // if (!user) {
-      //   console.log("user not found");
-      //   res.send({ message: "User not found", userExist: false });
-      // } else {
-      //   bcrypt.compare(password, user.password, (err, match) => {
-      //     console.log(match);
-      //     if (err) {
-      //       console.log("Error comparing passwords:", err);
-      //       return res.status(500).json({ message: "Internal Server Error" });
-      //     }
-      //     if (!match) {
-      //       console.log("Incorrect password");
-      //       return res.status(401).send({ message: "Incorrect password" });
-      //     } else {
-      //       const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
-      //       console.log("User signed in successfully");
-      //       res.send({
-      //         message: "User signed in successfully",
-      //         status: true,
-      //         user: user,
-      //         token: token,
-      //       });
-      //     }
-      //   });
-      // }
+      if (!user) {
+        console.log("user not found");
+        res.send({ message: "User not found", userExist: false });
+      } else {
+        bcrypt.compare(password, user.password, (err, match) => {
+          console.log(match);
+          if (err) {
+            console.log("Error comparing passwords:", err);
+            return res.status(500).json({ message: "Internal Server Error" });
+          }
+          if (!match) {
+            console.log("Incorrect password");
+            return res.status(401).send({ message: "Incorrect password" });
+          } else {
+            const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
+            console.log("User signed in successfully");
+            res.send({
+              message: "User signed in successfully",
+              status: true,
+              user: user,
+              token: token,
+            });
+          }
+        });
+      }
     })
     .catch((err) => {
       console.error("Error finding user:", err);
@@ -181,8 +180,8 @@ const userLogin = (req, res) => {
 
 module.exports = {
   userRegister,
-  userLogin,
   verifyEmailFromTokenLink,
+  userLogin,
 };
 
 

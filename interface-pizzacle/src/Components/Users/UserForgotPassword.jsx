@@ -2,7 +2,11 @@
 
 const UserForgotPassword = () => {
   return (
-    <div>UserForgotPassword</div>
+    <>
+    <section className="h-screen bg-black">
+
+    </section>
+    </>
   )
 }
 

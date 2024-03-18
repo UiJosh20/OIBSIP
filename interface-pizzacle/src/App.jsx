@@ -11,6 +11,7 @@ import AdminDashboard from './Components/Admin/AdminDashboard'
 import AdminLogin from './Components/Admin/AdminLogin'
 import ConfirmEmail from './Components/Users/ConfirmEmail'
 import Product from './Components/Layout/Product'
+import UserForgotPassword from './Components/Users/UserForgotPassword'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/user/register' element={<UserRegister />} />
         <Route path='/user/login' element={<UserLogin />} />
         <Route path='/user/verifyEmail' element={<ConfirmEmail />} />
+        <Route path='/user/forgot' element={<UserForgotPassword />} />
 
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
