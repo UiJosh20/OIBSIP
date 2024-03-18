@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const { log } = require("console");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
@@ -132,34 +133,45 @@ const verifyEmailFromTokenLink = (req, res) => {
 const userLogin = (req, res) => {
   let { email, password } = req.body;
 
+  console.log(req.body);
+
   userModel
     .findOne({ email })
     .then((user) => {
-      if (!user) {
-        console.log("user not found");
-        res.send({ message: "User not found", userExist: false });
-      } else {
-        bcrypt.compare(password, user.password, (err, match) => {
-          console.log(match);
-          if (err) {
-            console.log("Error comparing passwords:", err);
-            return res.status(500).json({ message: "Internal Server Error" });
-          }
-          if (!match) {
-            console.log("Incorrect password");
-            return res.status(401).send({ message: "Incorrect password" });
-          } else {
-            const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
-            console.log("User signed in successfully");
-            res.send({
-              message: "User signed in successfully",
-              status: true,
-              user: user,
-              token: token,
-            });
-          }
-        });
-      }
+      console.log(user)
+      bcrypt.compare(password, user.password, (err, match) => {
+            console.log(match);
+            if (err) {
+              console.log("Error comparing passwords:", err);
+              return res.status(500).json({ message: "Internal Server Error" });
+            }
+          })
+
+      // if (!user) {
+      //   console.log("user not found");
+      //   res.send({ message: "User not found", userExist: false });
+      // } else {
+      //   bcrypt.compare(password, user.password, (err, match) => {
+      //     console.log(match);
+      //     if (err) {
+      //       console.log("Error comparing passwords:", err);
+      //       return res.status(500).json({ message: "Internal Server Error" });
+      //     }
+      //     if (!match) {
+      //       console.log("Incorrect password");
+      //       return res.status(401).send({ message: "Incorrect password" });
+      //     } else {
+      //       const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
+      //       console.log("User signed in successfully");
+      //       res.send({
+      //         message: "User signed in successfully",
+      //         status: true,
+      //         user: user,
+      //         token: token,
+      //       });
+      //     }
+      //   });
+      // }
     })
     .catch((err) => {
       console.error("Error finding user:", err);

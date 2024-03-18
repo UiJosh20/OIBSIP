@@ -22,12 +22,16 @@ let userSchema = mongoose.Schema({
     }
 })
 
-userSchema.pre("save", function(next){
-    bcrypt.hash(this.password, 10, ((err, hash)=>{
-      this.password = hash
-      next()
-    }))
-  })
+userSchema.pre("save", function(next) {
+    const user = this;
+    bcrypt.hash(user.password, 10, (err, hash) => {
+        if (err) {
+            return next(err);
+        }
+        user.password = hash;
+        next();
+    });
+});
 
 let userModel = mongoose.model('userModel', userSchema)
 
