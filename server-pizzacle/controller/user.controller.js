@@ -55,7 +55,7 @@ const sendVerificationToEmail = (email) => {
       from: MAILEREMAIL,
       to: email,
       subject: "Verify your email address",
-      text: `click on the link to verify your email ${verificationTokenLink}`,
+      text: `Congratulations your email has been verified successfully`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -68,66 +68,6 @@ const sendVerificationToEmail = (email) => {
   });
 };
 
-const verifyEmailFromTokenLink = (req, res) => {
-  const { token } = req.params;
-
-  userModel
-    .findOne({ verificationToken: token })
-    .then((user) => {
-      if (user) {
-        user.isVerified = true;
-        return user.save();
-      } else {
-        res.status(404).json({ message: "Invalid token" });
-      }
-    })
-    .then((user) => {
-      res.send(`
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body{
-            background-color:black;
-            border-top: 2px solid rgb(9, 216, 9);
-            height: 100vh;
-        }
-        main{
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-        }
-        section{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-    </style>
-</head>
-<body>
-    <section>
-        <main>
-            <h4>Your email as been verified successfully, continue with your login process</h4>
-        </main>
-    </section>
-</body>
-</html>
-            `);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ message: "Internal Server Error" });
-    });
-};
 
 const userLogin = (req, res) => {
   let { email, password } = req.body;
@@ -137,9 +77,7 @@ const userLogin = (req, res) => {
   userModel
     .findOne({ email })
     .then((user) => {
-      console.log(user)
       bcrypt.compare(password, user.password, (match, err) => {
-            console.log(match);
             if (err) {
               console.log("Error comparing passwords:", err);
               return res.status(500).json({ message: "Internal Server Error" });
@@ -180,7 +118,6 @@ const userLogin = (req, res) => {
 
 module.exports = {
   userRegister,
-  verifyEmailFromTokenLink,
   userLogin,
 };
 

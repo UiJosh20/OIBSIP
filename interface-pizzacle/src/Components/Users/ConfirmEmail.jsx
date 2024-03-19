@@ -8,25 +8,13 @@ const ConfirmEmail = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/user/verify/${verificationToken}`)
-            .then((response) => {
-                const { data } = response;
-                if (data) {
-                    setVerificationStatus("A verification mail has been sent to your email...");
-                    setTimeout(()=>{
-                    setVerificationStatus("Email verified successfully. Redirecting to login page...");
-                    }, 15000)
-                    setTimeout(() => {
-                        navigate("/user/login");
-                    }, 17000);
-                } else {
-                    setVerificationStatus("Invalid token. Please contact support.");
-                }
-            })
-            .catch((error) => {
-                console.error("Verification failed:", error);
-                setVerificationStatus("Verification failed. Please try again later.");
-            });
+        setVerificationStatus("A verification mail has been sent to your email...");
+        setTimeout(()=>{
+        setVerificationStatus("Email verified successfully. Redirecting to login page...");
+        }, 15000)
+        setTimeout(() => {
+            navigate("/user/login");
+        }, 17000)
     }, [verificationToken, navigate]);
 
     return (

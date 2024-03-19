@@ -1,14 +1,11 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { RegisterSchema } from "../../Schema/UserAdminRegisterSchema"
+import { RegisterSchema } from "../../Schema/UserAdminRegisterSchema";
 import { Link, useNavigate } from "react-router-dom";
-import Alert from '@mui/material/Alert';
-
-
+import Alert from "@mui/material/Alert";
 
 const UserRegister = () => {
-
   const URL = "http://localhost:3000/user/register";
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -19,14 +16,13 @@ const UserRegister = () => {
     lastName: "",
     email: "",
     password: "",
-    confirmPassword:"",
+    confirmPassword: "",
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
-  const togglePasswordVisibilityX = () => {
+  const togglePasswordVisibilityConfirm = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
@@ -35,15 +31,24 @@ const UserRegister = () => {
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
       setSigningUp(true);
-      if (values.password === values.confirmPassword){
-        axios.post(URL, values)
+      if (values.password !== values.confirmPassword) {
+        {
+          errors.confirmPassword = "Password does not match";
+        }
+        setTimeout(() => {
+          setSigningUp(false)
+          errors.confirmPassword = ""
+        }, 2500);
+        
+       
+      } else {
+        axios
+          .post(URL, values)
           .then((response) => {
             if (response.data.status == 200) {
-              navigate(
-                "/user/verifyEmail"
-              )
+              navigate("/user/verifyEmail");
             } else {
-              navigate("/user/signup");
+              navigate("/user/register");
             }
           })
           .catch((error) => {
@@ -54,8 +59,6 @@ const UserRegister = () => {
               setSigningUp(false);
             }, 3000);
           });
-      }else{
-        alert("Password and Confirm Password does not match");
       }
     },
   });
@@ -63,14 +66,26 @@ const UserRegister = () => {
     <>
       <section className="flex justify-center bg-black h-screen lg:p-10 w-full border-t-2 border-green-300">
         <main className=" shadow-md bg-black text-white lg:rounded-lg w-96 lg:py-3">
-          <h1 className="lg:py-5 font-bold lg:text-3xl text-center lg:block hidden w-full text-white">Create Account</h1>
-          <p className="pt-5 font-bold text-2xl text-center lg:hidden mt-10 mb-7 text-white">Create Account</p>
+          <h1 className="lg:py-5 font-bold lg:text-3xl text-center lg:block hidden w-full text-white">
+            Create Account
+          </h1>
+          <p className="pt-5 font-bold text-2xl text-center lg:hidden mt-10 mb-7 text-white">
+            Create Account
+          </p>
           <div className="px-5">
-             {(errors.firstName || errors.lastName || errors.email || errors.password) && (
+            {(errors.firstName ||
+              errors.lastName ||
+              errors.email ||
+              errors.password ||
+              errors.confirmPassword) && (
               <Alert sx={{ width: "100%" }} severity="warning">
-                {errors.firstName || errors.lastName || errors.email || errors.password}
+                {errors.firstName ||
+                  errors.lastName ||
+                  errors.email ||
+                  errors.password ||
+                  errors.confirmPassword}
               </Alert>
-            )} 
+            )}
           </div>
           <form onSubmit={handleSubmit} className="lg:p-5 px-2">
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
@@ -83,9 +98,7 @@ const UserRegister = () => {
                 className="w-full outline-none text-black"
                 autoFocus
               />
-              <span class="material-symbols-outlined text-black">
-                info
-              </span>
+              <span class="material-symbols-outlined text-black">info</span>
             </div>
 
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
@@ -97,9 +110,7 @@ const UserRegister = () => {
                 value={values.lastName}
                 className="w-full outline-none text-black"
               />
-              <span class="material-symbols-outlined text-black">
-                info
-              </span>
+              <span class="material-symbols-outlined text-black">info</span>
             </div>
 
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
@@ -111,9 +122,7 @@ const UserRegister = () => {
                 value={values.email}
                 className="w-full  text-black outline-none"
               />
-              <span class="material-symbols-outlined text-black">
-                mail
-              </span>
+              <span class="material-symbols-outlined text-black">mail</span>
             </div>
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
               <input
@@ -124,20 +133,26 @@ const UserRegister = () => {
                 value={values.password}
                 className="w-full outline-none text-black"
               />
-              <span className="material-symbols-outlined text-black cursor-pointer" onClick={togglePasswordVisibility}>
+              <span
+                className="material-symbols-outlined text-black cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
                 {showPassword ? "visibility" : "visibility_off"}
               </span>
             </div>
             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm password"
+                placeholder="Confirm Password"
                 onChange={handleChange}
                 name="confirmPassword"
                 value={values.confirmPassword}
                 className="w-full outline-none text-black"
               />
-              <span className="material-symbols-outlined text-black cursor-pointer" onClick={togglePasswordVisibilityX}>
+              <span
+                className="material-symbols-outlined text-black cursor-pointer"
+                onClick={togglePasswordVisibilityConfirm}
+              >
                 {showConfirmPassword ? "visibility" : "visibility_off"}
               </span>
             </div>
@@ -156,10 +171,9 @@ const UserRegister = () => {
             </p>
           </form>
         </main>
-
       </section>
     </>
-  )
-}
+  );
+};
 
-export default UserRegister
+export default UserRegister;

@@ -65,7 +65,7 @@ export const UserLogin = () => {
                         <h1 className="text-center w-full mt-20 mb-10 font-bold text-2xl text-black lg:hidden">Login</h1>
                         <div className="px-5">
                             {loginSuccess && (
-                                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                                <Alert  severity="success">
                                     Logged in successfully
                                 </Alert>
                             )}
