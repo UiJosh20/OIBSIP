@@ -71,44 +71,34 @@ const sendVerificationToEmail = (email) => {
 
 const userLogin = (req, res) => {
   let { email, password } = req.body;
-
-  console.log(req.body);
-
   userModel
     .findOne({ email })
     .then((user) => {
-      bcrypt.compare(password, user.password, (match, err) => {
-            if (err) {
-              console.log("Error comparing passwords:", err);
-              return res.status(500).json({ message: "Internal Server Error" });
-            }
-          })
-
       if (!user) {
-        console.log("user not found");
-        res.send({ message: "User not found", userExist: false });
-      } else {
-        bcrypt.compare(password, user.password, (err, match) => {
-          console.log(match);
-          if (err) {
-            console.log("Error comparing passwords:", err);
-            return res.status(500).json({ message: "Internal Server Error" });
-          }
-          if (!match) {
-            console.log("Incorrect password");
-            return res.status(401).send({ message: "Incorrect password" });
-          } else {
-            const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
-            console.log("User signed in successfully");
-            res.send({
-              message: "User signed in successfully",
-              status: true,
-              user: user,
-              token: token,
-            });
-          }
-        });
+        console.log("User not found");
+        return res.status(404).send({ message: "User not found" });
       }
+
+      bcrypt.compare(password, user.password, (err, match) => {
+        if (err) {
+          console.error("Error comparing passwords:", err);
+          return res.status(500).json({ message: "Internal Server Error" });
+        }
+
+        if (!match) {
+          console.log("Incorrect password");
+          return res.status(401).send({ message: "Incorrect password" });
+        }
+
+        const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
+        console.log("User signed in successfully");
+        res.send({
+          message: "User signed in successfully",
+          status: true,
+          user: user,
+          token: token,
+        });
+      });
     })
     .catch((err) => {
       console.error("Error finding user:", err);
@@ -116,9 +106,23 @@ const userLogin = (req, res) => {
     });
 };
 
+const verifyToken = (req, res) => {
+  const { token } = req.body;
+  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+          console.error('Token verification failed:', err);
+      } else {
+          console.log(decoded);
+          console.log('Token verified successfully');
+          res.send({ message: "Token verified successfully", status: true, decoded: decoded, valid: true, token: token });
+      }
+  });
+}
+
 module.exports = {
   userRegister,
   userLogin,
+  verifyToken
 };
 
 

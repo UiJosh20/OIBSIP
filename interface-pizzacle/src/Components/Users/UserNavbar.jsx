@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 
 const UserNavbar = () => {
+  const firstName = localStorage.getItem('firstName');
+  const lastName = localStorage.getItem('lastName');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -11,11 +18,53 @@ const UserNavbar = () => {
     }, 4500);
     return () => clearTimeout(timer);
   }, []);
+
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xaf;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+  }
+  
+
   return (
     <>
     {loading ? (
       <div className="flex justify-center items-center h-screen flex-col bg-black">
-        <p className="logo1 !text-5xl mb-10 text-white">Pizzacle</p>
+        <p className="logo1 !text-5xl mb-10 text-white">PIZZACLE</p>
         <div class="three-body">
           <div class="three-body__dot"></div>
           <div class="three-body__dot"></div>
@@ -29,9 +78,9 @@ const UserNavbar = () => {
       <small>We open at 9:00AM</small>
     </nav>
     <nav className="shadow-md lg:py-3 lg:px-10 flex justify-between items-center sticky top-0 bg-white z-10">
-      <div>
+      <Link to='/user/dashboard'>
         <h1 className="logop">PIZZACLE</h1>
-      </div>
+      </Link>
       <div className="flex items-center gap-2">
         <div className="border-2 border-gray-200 rounded-md px-5">
           <input type="text" placeholder="Search for pizza, side dish and drinks" className="outline-none border-none p-2"/>
@@ -41,11 +90,41 @@ const UserNavbar = () => {
           <button >Search</button>
       </span>
 
-      <div className="space-x-5">
-        <Link>Account</Link>
-        <Link>Cart</Link>
-        <Link>Help</Link>
+      <div className="space-x-10 flex items-center">
+      <Link to='/user/cart'>
+         <p>Cart</p>
+        </Link>
+        <Link to='/user/cart'>
+         <p>Help</p>
+        </Link>
 
+
+        <div
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        <Stack direction="row" spacing={2}>
+      <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
+    </Stack>
+      </div>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>Orders</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+
+        
       </div>
       </div>
     </nav>
