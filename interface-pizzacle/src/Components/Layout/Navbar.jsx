@@ -3,27 +3,9 @@ import { useEffect, useState } from "react";
 import { Link} from "react-router-dom"
 
 const Navbar = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 4500);
-    return () => clearTimeout(timer);
-  }, []);
   return (
     <>
-    {loading ? (
-      <div className="flex justify-center items-center h-screen flex-col bg-black">
-        <p className="logo1 !text-5xl mb-10 text-white">Pizzacle</p>
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </div>
-    ) : (
-    <>
+
 
 <nav className="bg-green-800 lg:py-1 text-white text-center">
       <small>We open at 9:00AM</small>
@@ -55,8 +37,6 @@ const Navbar = () => {
 
       </nav> */}
       </>
-      )}
-    </>
   )
 }
 

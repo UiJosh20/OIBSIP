@@ -1,12 +1,13 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
 const UserDashboard = () => {
     const [tokenMatch, setTokenMatch] = useState(false);
     const [loading, setLoading] = useState(false);
+    const exploreRef = useRef(null);
 
   const TokenURL = 'http://localhost:3000/user/verifyToken';
   // const ClassURL = 'http://localhost:3000/user/userDashboard';
@@ -53,6 +54,9 @@ const UserDashboard = () => {
     };
   }, [navigate, loading]);
 
+  const handleExploreClick = () => {
+    exploreRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -71,18 +75,21 @@ const UserDashboard = () => {
                 
                 <Button
                   variant="contained"
+                  onClick={handleExploreClick}
                   className="!bg-white  !p-3 w-60 !text-black"
                 >
                   Explore
                 </Button>
               </div>
             </main>
+            <div ref={exploreRef}>
             <main className="bg-white mt-10">
               <div className="bg-green-900 w-full p-2 text-white text-center">
                 <p>You have a big appetite?</p>
               </div>
               <div className="h-screen "></div>
             </main>
+            </div>
 
             <main className="bg-white mt-10">
               <div className="bg-green-900 w-full py-2 px-10 text-white flex justify-between">
