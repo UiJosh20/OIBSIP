@@ -193,7 +193,7 @@ th{
   }
   
   .inputs input {
-    width: 32px;
+    width: 100px;
     height: 32px;
     text-align: center;
     border: none;

@@ -1,24 +1,37 @@
 import { useState } from "react";
 import axios from "axios";
+import { useFormik } from "formik";
+import { verifySchema } from "../../Schema/VerifyOTPSchema";
 
 const UserVeriyOTP = () => {
-  const [otp, setOtp] = useState("");
-  const [verificationStatus, setVerificationStatus] = useState("");
+  const navigate = useNavigate();
 
-  const handleVerify = () => {
-    axios.post("http://localhost:3000/user/verifyOTP", { otp })
-      .then(response => {
-        if (response.data.status) {
-          setVerificationStatus("OTP verified successfully");
-        } else {
-          setVerificationStatus("Invalid OTP");
-        }
-      })
-      .catch(error => {
-        console.error("Error verifying OTP:", error);
-        setVerificationStatus("Failed to verify OTP. Please try again.");
-      });
-  };
+  const [buttonText, setButtonText] = useState("Verify OTP");
+
+  const { handleChange, handleSubmit, values, errors } = useFormik({
+    initialValues: {
+      otp: "",
+    },
+    validationSchema: verifySchema,
+    onSubmit: (values) => {
+      setButtonText("Verifying...");
+      axios
+        .post(URL, values)
+        .then((response) => {
+          if (response.data.status == true) {
+            setButtonText("Verified");
+            setTimeout(() => {
+              navigate("/user/createpassword");
+            }, 3000);
+          }
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setButtonText("Verify OTP");
+          }, 3000);
+        });
+    },
+  });
 
   return (
     <>
@@ -31,15 +44,20 @@ const UserVeriyOTP = () => {
           <div className="inputs">
             <input
               type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
+              onChange={handleChange}
+              name="otp"
+              value={values.otp}
               maxLength="6"
             />
           </div>
-          <button className="action" onClick={handleVerify}>
-            Verify
+          <button
+            className="action"
+            onClick={handleVerify}
+            disabled={buttonText === "Verifying..."}
+          >
+            {buttonText}
           </button>
-          {verificationStatus && <p>{verificationStatus}</p>}
+       
         </form>
       </section>
     </>

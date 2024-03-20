@@ -136,8 +136,8 @@ This OTP is valid for 30 minutes. Please do not share this OTP with anyone.
 
 const forgotten = (req, res) => {
   const otp = generateOTP();
-  const { email } = req.body;
   const expirationTime = new Date(Date.now() + 30 * 60 * 1000);
+  const { email } = req.body;
 
   userModel
     .findOneAndUpdate(
