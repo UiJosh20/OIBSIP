@@ -12,6 +12,7 @@ import AdminLogin from './Components/Admin/AdminLogin'
 import ConfirmEmail from './Components/Users/ConfirmEmail'
 import Product from './Components/Layout/Product'
 import UserForgotPassword from './Components/Users/UserForgotPassword'
+import UserVeriyOTP from './Components/Users/UserVeriyOTP'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path='/user/login' element={<UserLogin />} />
         <Route path='/user/verifyEmail' element={<ConfirmEmail />} />
         <Route path='/user/forgot' element={<UserForgotPassword />} />
+        <Route path='/user/verifyOTP' element={<UserVeriyOTP />} />
 
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />

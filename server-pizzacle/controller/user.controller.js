@@ -55,7 +55,7 @@ const sendVerificationToEmail = (email) => {
       from: MAILEREMAIL,
       to: email,
       subject: "Verify your email address",
-      text: `Congratulations your email has been verified successfully`
+      text: `Congratulations your email has been verified successfully`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -67,7 +67,6 @@ const sendVerificationToEmail = (email) => {
     });
   });
 };
-
 
 const userLogin = (req, res) => {
   let { email, password } = req.body;
@@ -106,23 +105,148 @@ const userLogin = (req, res) => {
     });
 };
 
+const sendOTPToEmail = (email, otp) => {
+  return new Promise((resolve, reject) => {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: MAILEREMAIL,
+        pass: MAILERPASS,
+      },
+    });
+
+    const mailOptions = {
+      from: MAILEREMAIL,
+      to: email,
+      subject: "Pizzacle forgotten password OTP",
+      text: `Your one time password OTP is : ${otp}
+This OTP is valid for 30 minutes. Please do not share this OTP with anyone.
+          `,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
+  });
+};
+
+const forgotten = (req, res) => {
+  const otp = generateOTP();
+  const { email } = req.body;
+  const expirationTime = new Date(Date.now() + 30 * 60 * 1000);
+
+  userModel
+    .findOneAndUpdate(
+      { email },
+      { otp, otpExpiration: expirationTime },
+      { new: true, upsert: true }
+    )
+    .then((user) => {
+      if (user) {
+        sendOTPToEmail(email, otp)
+          .then(() => {
+            res
+              .status(200)
+              .send({ message: "OTP sent to email", status: true, otp: otp });
+          })
+          .catch((error) => {
+            res.status(500).json({ error: "Failed to send OTP to email" });
+          });
+      } else {
+        console.log("user not found");
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Database error" });
+    });
+};
+
+const verifyOTP = (req, res) => {
+  const { otp } = req.body;
+
+  userModel
+    .findOne({ otp })
+    .then((user) => {
+      if (user) {
+        user.otp = null;
+        user.otpExpiration = null;
+        user
+          .save()
+          .then(() => {
+            res
+              .status(200)
+              .json({ message: "OTP verified successfully", status: true });
+          })
+          .catch((error) => {
+            console.error("Error clearing OTP:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+          });
+      } else {
+        res.status(400).json({ message: "Invalid OTP", status: false });
+      }
+    })
+    .catch((error) => {
+      console.error("Error verifying OTP:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+};
+
+
+const createNewPassword = (req, res) => {
+  const { email, password } = req.body;
+  bcrypt.hash(password, 10, (err, hashedPassword) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send({ message: "Internal Server Error" });
+    }
+    userModel
+      .findOneAndUpdate({ email }, { password: hashedPassword }, { new: true })
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(404)
+            .send({ message: "User not found", status: false });
+        }
+
+        res
+          .status(200)
+          .json({ message: "Password updated successfully", status: true });
+      })
+      .catch((error) => {
+        console.error("Error updating password:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+      });
+  });
+};
+
 const verifyToken = (req, res) => {
   const { token } = req.body;
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
-      if (err) {
-          console.error('Token verification failed:', err);
-      } else {
-          console.log(decoded);
-          console.log('Token verified successfully');
-          res.send({ message: "Token verified successfully", status: true, decoded: decoded, valid: true, token: token });
-      }
+    if (err) {
+      console.error("Token verification failed:", err);
+    } else {
+      console.log(decoded);
+      console.log("Token verified successfully");
+      res.send({
+        message: "Token verified successfully",
+        status: true,
+        decoded: decoded,
+        valid: true,
+        token: token,
+      });
+    }
   });
-}
+};
 
 module.exports = {
   userRegister,
   userLogin,
-  verifyToken
+  forgotten,
+  verifyOTP,
+  createNewPassword,
+  verifyToken,
 };
-
-

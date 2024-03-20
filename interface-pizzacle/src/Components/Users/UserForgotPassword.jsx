@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { forgotPasswordSchema } from "../../Schema/ForgotPasswordSchema";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const UserForgotPassword = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const UserForgotPassword = () => {
         .then((response) => {
           if (response.data.otp) {
             setTimeout(() => {
-              navigate("/user/verifyEmail");
+              navigate("/user/verifyOTP");
             }, 3000);
           } else {
             setButtonText("Send OTP");
@@ -48,7 +49,7 @@ const UserForgotPassword = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen flex-col bg-black">
-          <p className="logo1 !text-5xl mb-10 text-white">Pizzacle</p>
+          <p className="logo1 !text-5xl mb-10 text-white">PIZZACLE</p>
           <div class="three-body">
             <div class="three-body__dot"></div>
             <div class="three-body__dot"></div>
