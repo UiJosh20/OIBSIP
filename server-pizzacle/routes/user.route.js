@@ -8,7 +8,7 @@ router.post('/user/forgot', forgotten)
 router.post('/user/verifyOtp', verifyOTP)
 router.post('/user/createNewPassword', createNewPassword)
 router.post('/user/verifyToken', verifyToken)
-router.post('/user/pizzaMenu', pizzaMenu)
+router.get('/user/pizzaMenu', pizzaMenu)
 
 
 module.exports = router

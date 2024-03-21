@@ -399,8 +399,14 @@ const pizzaMenu = (req, res) => {
       price: 5,
       image_URL:"",
     },
-    
+
   ]
+
+  res.send({
+    pizzaList: pizzaList,
+    sideDish: sideDish,
+    drinks: drinks
+  })
 }
 
 module.exports = {

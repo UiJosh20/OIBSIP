@@ -63,7 +63,7 @@ const UserCreateNewPassword = () => {
                         </div>
                         <div className="px-5 mb-5">
                             {(errors.email || errors.password) && (
-                                <Alert sx={{ width: "100%" }} severity="warning">
+                                <Alert  sx={{ width: "100%" }} severity="warning">
                                     {errors.email || errors.password}
                                 </Alert>
                             )}
