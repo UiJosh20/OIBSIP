@@ -186,7 +186,7 @@ const verifyOTP = (req, res) => {
             res.status(500).json({ error: "Internal Server Error" });
           });
       } else {
-        res.status(400).json({ message: "Invalid OTP", status: false });
+        res.status(404).json({ message: "Invalid OTP", status: false });
       }
     })
     .catch((error) => {

@@ -3,13 +3,16 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { verifySchema } from "../../Schema/VerifyOTPSchema";
 import { Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const UserVeriyOTP = () => {
   const navigate = useNavigate();
-
   const [buttonText, setButtonText] = useState("Verify OTP");
   const [verifySuccess, setVerifySuccess] = useState(false);
   const [verifyError, setVerifyError] = useState(null);
+
+     const URL = "http://localhost:3000/user/verifyOtp";
+ 
 
   const { handleChange, handleSubmit, values, errors } = useFormik({
     initialValues: {
@@ -80,7 +83,6 @@ const UserVeriyOTP = () => {
           </div>
           <button
             className="action"
-            onClick={handleVerify}
             disabled={buttonText === "Verifying..."}
           >
             {buttonText}
