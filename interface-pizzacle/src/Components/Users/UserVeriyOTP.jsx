@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 const UserVeriyOTP = () => {
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Verify OTP");
-  const [verifySuccess, setVerifySuccess] = useState(false);
-  const [verifyError, setVerifyError] = useState(null);
+
 
      const URL = "http://localhost:3000/user/verifyOtp";
  
@@ -51,23 +50,6 @@ const UserVeriyOTP = () => {
     <>
       <section className="flex justify-center items-center lg:p-48 bg-black p-5 h-screen">
         <form className="form lg:w-full" onSubmit={handleSubmit}>
-          <div>
-            {verifySuccess && (
-              <Alert severity="success">Verified successfully</Alert>
-            )}
-            {verifyError && (
-              <Alert sx={{ width: "100%" }} severity="error">
-                {verifyError}
-              </Alert>
-            )}
-          </div>
-          <div className="px-5">
-            {errors.otp && (
-              <Alert sx={{ width: "100%" }} severity="warning">
-                {errors.otp}
-              </Alert>
-            )}
-          </div>
           <div className="title">OTP Verification</div>
           <p className="message">
             We have sent a verification code to your email address

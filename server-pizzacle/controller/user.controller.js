@@ -167,7 +167,7 @@ const forgotten = (req, res) => {
 
 const verifyOTP = (req, res) => {
   const { otp } = req.body;
-
+  
   userModel
     .findOne({ otp })
     .then((user) => {
