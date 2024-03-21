@@ -258,7 +258,148 @@ const pizzaMenu = (req, res) => {
       price: 12,
       image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
 
+    },
+    {
+      id: 3,
+      name: "Hawaiian",
+      description: "A pizza with tomato sauce, mozzarella cheese, and ham and pineapple.",
+      price: 15,
+      image_URL:"",
+    },
+    {
+      id: 4,
+      name: "Veggie",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various vegetables.",
+      price: 13,
+      image_URL:'',
+    },
+    {
+      id: 5,
+      name: "Meat Lovers",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various meats.",
+      price: 14,
+      image_URL:"",
+    },
+    {
+      id: 6,
+      name: "Cheese",
+      description: "A pizza with tomato sauce, mozzarella cheese, and extra cheese.",
+      price: 11,
+      image_URL:"",
+    },
+    {
+      id: 7,
+      name: "BBQ Chicken",
+      description: "A pizza with tomato sauce, mozzarella cheese, and barbecue chicken.",
+      price: 16,
+      image_URL:"",
+    },
+    {
+      id: 7,
+      name: "Chicken Tikka",
+      description: "A pizza with tomato sauce, mozzarella cheese, and chicken tikka.",
+      price: 17,
+      image_URL:"",
+    },
+    {
+      id: 8,
+      name: "Mexican Green Wave",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+      price: 18,
+      image_URL:"",
+    },
+    {
+      id: 9,
+      name: "Mexican Red Wave",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+      price: 20,
+      image_URL:"",
+    },
+    {
+      id: 10,
+      name: "Mexican Yellow Wave",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+      price: 20,
+      image_URL:"",
+    },
+
+    {
+      id: 11,
+      name: "Mexican Blue Wave",
+      description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+      price: 20,
+      image_URL:"",
     }
+  ]
+
+  const sideDish = [
+    {
+      id: 1,
+      name: "Garlic Bread",
+      description: "A classic bread with garlic butter.",
+      price: 5,
+      image_URL:"",
+    },
+    {
+      id: 2,
+      name:"French Fries",
+      description:"Fried irish potatoes",
+      price: 10,
+      image_URL:"",
+    },
+    {
+      id: 3,
+      name:"Chicken Wings",
+      description:"Fried chicken wings",
+      price: 15,
+      image_URL:"",
+    },
+    {
+      id: 4,
+      name:"Cacio e pepe",
+      description:"A combination of pasta and vegetables",
+      price:'24',
+      image_URL:"",
+    },
+    {
+      id: 5,
+      name: "Caesar Salad",
+      description:'A romanian salad',
+      price:'20',
+      image_URL:"",
+    }
+  ]
+
+  const drinks = [
+    {
+      id: 1,
+      name: "Coca Cola",
+      description: "A carbonated soft drink",
+      price: 5,
+      image_URL:"",
+    },
+    {
+      id: 2,
+      name: "Pepsi",
+      description: "A carbonated soft drink",
+      price: 5,
+      image_URL:"",
+    },
+    {
+      id: 3,
+      name: "Sprite",
+      description: "A carbonated soft drink",
+      price: 5,
+      image_URL:"",
+    },
+    {
+      id: 4,
+      name: "Fanta",
+      description: "A carbonated soft drink",
+      price: 5,
+      image_URL:"",
+    },
+    
   ]
 }
 
