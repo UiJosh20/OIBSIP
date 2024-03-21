@@ -167,7 +167,7 @@ const forgotten = (req, res) => {
 
 const verifyOTP = (req, res) => {
   const { otp } = req.body;
-  
+
   userModel
     .findOne({ otp })
     .then((user) => {
@@ -242,6 +242,26 @@ const verifyToken = (req, res) => {
   });
 };
 
+const pizzaMenu = (req, res) => {
+  const pizzaList = [
+    {
+      id: 1,
+      name: "Margherita",
+      description: "A classic pizza with tomato sauce, mozzarella cheese, and basil.",
+      price: 10,
+      image_URL: "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png"
+    },
+    {
+      id: 2,
+      name: "Pepperoni",
+      description: "A pizza with tomato sauce, mozzarella cheese, and pepperoni.",
+      price: 12,
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
+    }
+  ]
+}
+
 module.exports = {
   userRegister,
   userLogin,
@@ -249,4 +269,5 @@ module.exports = {
   verifyOTP,
   createNewPassword,
   verifyToken,
+  pizzaMenu
 };
