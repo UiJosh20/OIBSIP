@@ -2,11 +2,14 @@ import { useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import { verifySchema } from "../../Schema/VerifyOTPSchema";
+import { Alert } from "@mui/material";
 
 const UserVeriyOTP = () => {
   const navigate = useNavigate();
 
   const [buttonText, setButtonText] = useState("Verify OTP");
+  const [verifySuccess, setVerifySuccess] = useState(false);
+  const [verifyError, setVerifyError] = useState(null);
 
   const { handleChange, handleSubmit, values, errors } = useFormik({
     initialValues: {
@@ -20,10 +23,18 @@ const UserVeriyOTP = () => {
         .then((response) => {
           if (response.data.status == true) {
             setButtonText("Verified");
+            setVerifySuccess(true);
             setTimeout(() => {
-              navigate("/user/createpassword");
+              navigate("/user/createNewPassword");
             }, 3000);
           }
+        })
+        .catch((err) => {
+          console.error(err.response.data.message);
+          setVerifyError(err.response.data.message);
+          setTimeout(() => {
+            setVerifyError(null);
+          }, 2000);
         })
         .finally(() => {
           setTimeout(() => {
@@ -36,7 +47,24 @@ const UserVeriyOTP = () => {
   return (
     <>
       <section className="flex justify-center items-center lg:p-48 bg-black p-5 h-screen">
-        <form className="form lg:w-full">
+        <form className="form lg:w-full" onSubmit={handleSubmit}>
+          <div>
+            {verifySuccess && (
+              <Alert severity="success">Verified successfully</Alert>
+            )}
+            {verifyError && (
+              <Alert sx={{ width: "100%" }} severity="error">
+                {verifyError}
+              </Alert>
+            )}
+          </div>
+          <div className="px-5">
+            {errors.otp && (
+              <Alert sx={{ width: "100%" }} severity="warning">
+                {errors.otp}
+              </Alert>
+            )}
+          </div>
           <div className="title">OTP Verification</div>
           <p className="message">
             We have sent a verification code to your email address
@@ -57,7 +85,6 @@ const UserVeriyOTP = () => {
           >
             {buttonText}
           </button>
-       
         </form>
       </section>
     </>
