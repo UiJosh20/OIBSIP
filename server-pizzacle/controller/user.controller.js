@@ -411,7 +411,7 @@ const drinks = [
 
 ]
 const pizzaMenu = (req, res) => {
-  res.send({pizzaList, sideDish, drinks});
+  res.send(pizzaList);
 }
 const pizzaDisplay = (req, res) => {
   const id = parseInt(req.params.id);
