@@ -6,7 +6,7 @@ const Description = () => {
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
 
     const { id } = useParams()
-    const [description, setPizzaDescription] = useState([{})
+    const [description, setPizzaDescription] = useState([])
     useEffect(() => {
         axios.get(menuURL)
         .then((response) => {

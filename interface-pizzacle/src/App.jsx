@@ -28,7 +28,7 @@ function App() {
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />} />
           <Route path='/product' element={<Product />} />
-          <Route path='/description' element={<Description />} />
+          <Route path='/description/:id' element={<Description />} />
         </Route>
 
         {/* user page */}

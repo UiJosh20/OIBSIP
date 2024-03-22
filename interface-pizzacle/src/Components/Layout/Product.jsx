@@ -5,19 +5,20 @@ import { useEffect, useState } from "react";
 
 const Product = () => {
   const [pizza, setPizza] = useState([]);
-  const { id } = useParams();
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
+
 
 
   useEffect(() => {
     axios.get(menuURL)
       .then((response) => {
-        setPizza(response.data);
+       setPizza(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching pizza:", error);
       });
-  }, [id]);
+  }, []);
 
   return (
     <>
@@ -27,8 +28,8 @@ const Product = () => {
             <p>Pizza with different flavour</p>
           </div>
           <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
-          {pizza.pizzaList && pizza.pizzaList.map((pizza) => (
-                <Link to='/description' key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+          {pizza.map((pizza)=>(
+                <Link to={`/description/${pizza.id}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
                     className="w-full"
                     src={pizza.image_URL}
@@ -52,7 +53,7 @@ const Product = () => {
             <Link to='/user/product/all'>See more</Link>
           </div>
           <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
-          {pizza.drinks && pizza.drinks.map((pizza) => (
+          {/* {pizza.drinks && pizza.drinks.map((pizza) => (
                 <Link key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
                     className="w-full"
@@ -80,7 +81,7 @@ const Product = () => {
                     <p className="text-white text-base bg-green-700 p-2 w-32 rounded-md text-center my-5">Price: ${pizza.price}</p>
                   </div>
                 </Link>
-              ))}
+              ))} */}
              
             </div>
         </main>
