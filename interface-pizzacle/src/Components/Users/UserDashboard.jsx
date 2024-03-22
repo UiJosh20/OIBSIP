@@ -8,6 +8,7 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState([])
   const exploreRef = useRef(null);
+  const {id} = useParams()
 
   const TokenURL = "http://localhost:3000/user/verifyToken";
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
@@ -53,13 +54,13 @@ const UserDashboard = () => {
     axios.get(menuURL)
     .then((response) => {
       setMenu(response.data)
-      console.log(response.data.pizzaList[0]);
+
     })
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [navigate, loading]);
+  }, [navigate, loading, id]);
 
   const handleExploreClick = () => {
     exploreRef.current.scrollIntoView({ behavior: "smooth" });
@@ -94,17 +95,22 @@ const UserDashboard = () => {
             <div className="bg-green-900 w-full p-2 text-white text-center">
               <p>You have a big appetite?</p>
             </div>
-            <div className="h-screen ">
-             
-                  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
+            {menu.pizzaList && menu.pizzaList.map((pizza) => (
+                <div key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
-                    class="w-full"
-                    src={menu.image_URL}
-                    alt="Sunset in the mountains"
+                    className="w-full"
+                    src={pizza.image_URL}
+                    alt={pizza.name}
                   />
-                  
-                 
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">{pizza.name}</div>
+                    <p className="text-gray-700 text-base">{pizza.description}</p>
+                    <p className="text-white text-base bg-green-700 p-2 w-32 rounded-md text-center my-5">Price: ${pizza.price}</p>
+                  </div>
                 </div>
+              ))}
+
               
              
             </div>

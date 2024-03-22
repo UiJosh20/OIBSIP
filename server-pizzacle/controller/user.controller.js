@@ -264,63 +264,72 @@ const pizzaMenu = (req, res) => {
       name: "Hawaiian",
       description: "A pizza with tomato sauce, mozzarella cheese, and ham and pineapple.",
       price: 15,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 4,
       name: "Veggie",
       description: "A pizza with tomato sauce, mozzarella cheese, and various vegetables.",
       price: 13,
-      image_URL:'',
+           image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 5,
       name: "Meat Lovers",
       description: "A pizza with tomato sauce, mozzarella cheese, and various meats.",
       price: 14,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 6,
       name: "Cheese",
       description: "A pizza with tomato sauce, mozzarella cheese, and extra cheese.",
       price: 11,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 7,
       name: "BBQ Chicken",
       description: "A pizza with tomato sauce, mozzarella cheese, and barbecue chicken.",
       price: 16,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 7,
       name: "Chicken Tikka",
       description: "A pizza with tomato sauce, mozzarella cheese, and chicken tikka.",
       price: 17,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 8,
       name: "Mexican Green Wave",
       description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
       price: 18,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 9,
       name: "Mexican Red Wave",
       description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
       price: 20,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
     {
       id: 10,
       name: "Mexican Yellow Wave",
       description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
       price: 20,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     },
 
     {
@@ -328,7 +337,8 @@ const pizzaMenu = (req, res) => {
       name: "Mexican Blue Wave",
       description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
       price: 20,
-      image_URL:"",
+      image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+
     }
   ]
 

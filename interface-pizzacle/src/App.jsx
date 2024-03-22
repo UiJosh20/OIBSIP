@@ -14,6 +14,7 @@ import Product from './Components/Layout/Product'
 import UserForgotPassword from './Components/Users/UserForgotPassword'
 import UserVeriyOTP from './Components/Users/UserVeriyOTP'
 import UserCreateNewPassword from './Components/Users/UserCreateNewPassword'
+import Description from './Components/Layout/Description'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />} />
           <Route path='/product' element={<Product />} />
+          <Route path='/description' element={<Description />} />
         </Route>
 
         {/* user page */}
