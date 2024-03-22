@@ -52,7 +52,7 @@ const ProductDescription = () => {
               <button onClick={incrementQuantity} className='bg-black text-white px-3 py-1 rounded-r-md ms-4'>+</button>
             </div>
             <div className='pe-10'>
-              <Button onClick={addToCart} className='bg-green-700 text-white p-4 rounded-md mt-4 shadow-md w-full'>Add to Cart</Button>
+              <Button variant='contained' onClick={addToCart} className='!bg-green-700 text-white !p-4 rounded-md !mt-4  w-full'>Add to Cart</Button>
             </div>
           </div>
         </main>
