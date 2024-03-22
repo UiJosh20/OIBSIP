@@ -15,6 +15,7 @@ import UserForgotPassword from './Components/Users/UserForgotPassword'
 import UserVeriyOTP from './Components/Users/UserVeriyOTP'
 import UserCreateNewPassword from './Components/Users/UserCreateNewPassword'
 import Description from './Components/Layout/Description'
+import ProductDescription from './Components/Users/ProductDescription'
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
           <Route path='/user/dashboard' element={<UserDashboard />} />
+          <Route path='/user/description/:id' element={<ProductDescription />} />
         </Route>
 
 

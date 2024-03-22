@@ -8,7 +8,7 @@ const UserDashboard = () => {
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState([])
   const exploreRef = useRef(null);
-  const {id} = useParams()
+
 
   const TokenURL = "http://localhost:3000/user/verifyToken";
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
@@ -60,7 +60,7 @@ const UserDashboard = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [navigate, loading, id]);
+  }, [navigate, loading]);
 
   const handleExploreClick = () => {
     exploreRef.current.scrollIntoView({ behavior: "smooth" });
@@ -96,8 +96,8 @@ const UserDashboard = () => {
               <p>You have a big appetite?</p>
             </div>
             <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
-            {menu.pizzaList && menu.pizzaList.map((pizza) => (
-                <div key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+            {menu.map((pizza) => (
+                <Link to={`/user/description/${pizza.id}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
                     className="w-full"
                     src={pizza.image_URL}
@@ -108,7 +108,7 @@ const UserDashboard = () => {
                     <p className="text-gray-700 text-base">{pizza.description}</p>
                     <p className="text-white text-base bg-green-700 p-2 w-32 rounded-md text-center my-5">Price: ${pizza.price}</p>
                   </div>
-                </div>
+                </Link>
               ))}
 
               

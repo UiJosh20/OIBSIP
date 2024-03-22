@@ -26,7 +26,7 @@ const Description = () => {
           </div>
           <div>
             <h1 className="text-3xl font-bold mb-3">{description.name}</h1>
-            <p className="text-gray-500 mb-3">Price : {description.price}</p>
+            <p className="text-gray-500 mb-3">Price : ${description.price}</p>
             <p className="text-gray-500 mb-3">Description : {description.description}</p>
             
           </div>
