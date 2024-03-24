@@ -7,7 +7,9 @@ const ProductDescription = () => {
   const { id } = useParams()
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
     const [description, setPizzaDescription] = useState([])
-    const [quantity, setQuantity] = useState(1); 
+    const [quantity, setQuantity] = useState(1);
+    const [selectedLocation, setSelectedLocation] = useState('');
+    const [states, setStates] = useState([]);
 
     useEffect(() => {
         axios.get(menuURL)
@@ -17,6 +19,13 @@ const ProductDescription = () => {
         })
         .catch((error) => {
           console.error("Error fetching pizza:", error);
+        });
+        axios.get(statesAPI)
+        .then((response) => {
+          setStates(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching states:", error);
         });
     }, [id]);
 
@@ -34,10 +43,14 @@ const ProductDescription = () => {
       alert("added to cart")
     };
 
+    const handleLocationChange = (event) => {
+      setSelectedLocation(event.target.value);
+    };
+
 
   return (
     <>
-    <section className="bg-gray-200 h-full px-5 py-5 flex gap-5">
+    <section className="bg-gray-200 h-screen px-5 py-5 flex gap-5">
         <main className="bg-white lg:flex lg:items-center">
           <div>
             <img src={description.image_URL} alt="" />
@@ -56,8 +69,18 @@ const ProductDescription = () => {
             </div>
           </div>
         </main>
-        <main className='bg-white px-5 py-5 w-96'>
+        <main className='bg-white  w-96'>
+          <div className='border-b border-black py-3 px-5'>
+            <p>DELIVERY</p>
+          </div>
+          <div className='border-b border-black py-3 px-5'>
+            <small>Free delivery on the first three daily orders in New york, Miami, San Francisco </small>
+          </div>
+          <div className='border-b-2 border-black py-3 px-5'>
+            <p>CHOOSE YOUR LOCATION</p>
 
+            
+          </div>
         </main>
       </section>
     </>
