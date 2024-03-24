@@ -86,10 +86,12 @@ const UserNavbar = () => {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
+              className="flex space-x-3 items-center"
             >
               <Stack direction="row" spacing={2}>
                 <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
               </Stack>
+              <span className="material-symbols-outlined cursor-pointer">expand_more</span>
             </div>
             <Menu
               id="basic-menu"

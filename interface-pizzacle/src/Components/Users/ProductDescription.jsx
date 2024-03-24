@@ -126,23 +126,29 @@ const ProductDescription = () => {
             </FormControl>
             <div className="px-3 pt-7 flex  space-x-5">
               <div className="py-3">
-              <span class="material-symbols-outlined">local_shipping</span>
+                <span class="material-symbols-outlined">local_shipping</span>
               </div>
               <div>
                 <p>Door Delivery</p>
                 <small>Delivery Fees $5</small>
-                <p>Ready for delivery between 20 & 30 minutes when you order within the next 2min</p>
+                <p>
+                  Ready for delivery between 20 & 30 minutes when you order
+                  within the next 2min
+                </p>
               </div>
             </div>
 
             <div className="px-3 py-5 flex  space-x-5">
               <div className="py-3">
-              <span class="material-symbols-outlined">local_shipping</span>
+                <span class="material-symbols-outlined">redeem</span>
               </div>
               <div>
                 <p>PickUp station</p>
                 <small>Delivery Fees $2</small>
-                <p>Ready for delivery between 20 & 30 minutes when you order within the next 2min</p>
+                <p>
+                  Ready for delivery between 20 & 30 minutes when you order
+                  within the next 2min
+                </p>
               </div>
             </div>
           </div>

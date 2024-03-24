@@ -221,3 +221,7 @@ th{
     cursor: pointer;
     align-self: end;
   }
+
+  p{
+    font-family: 'Instrument Sans', sans-serif;
+  }
