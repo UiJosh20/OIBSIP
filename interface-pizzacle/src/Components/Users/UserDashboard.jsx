@@ -96,8 +96,8 @@ const UserDashboard = () => {
               <p>You have a big appetite?</p>
             </div>
             <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
-            {menu.map((pizza) => (
-                <Link to={`/user/description/${pizza.id}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+            {menu.map((pizza, i) => (
+                <Link to={`/user/description/${i}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
                     className="w-full"
                     src={pizza.image_URL}

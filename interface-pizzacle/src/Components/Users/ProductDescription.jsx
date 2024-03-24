@@ -19,6 +19,7 @@ const ProductDescription = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedState, setSelectedState] = useState("New York");
   const [states, setStates] = useState([]);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     axios
@@ -53,6 +54,7 @@ const ProductDescription = () => {
 
   const addToCart = () => {
     alert("added to cart");
+    setCartCount(cartCount + 1);
   };
 
   const handleStateChange = (event) => {
@@ -103,10 +105,10 @@ const ProductDescription = () => {
             <p>DELIVERY</p>
           </div>
           <div className="border-b border-gray-200 py-3 px-5">
-            <span>
+            <p>
               Free delivery on the first three daily orders in New york, Oregon,
               Texas
-            </span>
+            </p>
           </div>
           <div className="border-b border-gray-200 py-10 px-5">
             <InputLabel id="state-label">Choose Your Location</InputLabel>
@@ -130,7 +132,7 @@ const ProductDescription = () => {
               </div>
               <div>
                 <p>Door Delivery</p>
-                <small>Delivery Fees $5</small>
+                <p className="text-green-700 font-bold">Delivery Fees $5</p>
                 <p>
                   Ready for delivery between 20 & 30 minutes when you order
                   within the next 2min
@@ -144,7 +146,7 @@ const ProductDescription = () => {
               </div>
               <div>
                 <p>PickUp station</p>
-                <small>Delivery Fees $2</small>
+                <p className="text-green-700 font-bold">Delivery Fees $2</p>
                 <p>
                   Ready for delivery between 20 & 30 minutes when you order
                   within the next 2min

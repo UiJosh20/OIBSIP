@@ -5,6 +5,7 @@ import {Outlet} from "react-router-dom"
 
 const UserLayout = () => {
     const [loading, setLoading] = useState(true);
+    const [cartCount, setCartCount] = useState(0); 
 
     useEffect(() => {
       const timer = setTimeout(() => {
@@ -12,6 +13,8 @@ const UserLayout = () => {
       }, 4500);
       return () => clearTimeout(timer);
     }, []);
+
+    
   
     return (
         <>
@@ -26,7 +29,7 @@ const UserLayout = () => {
           </div>
         ) : (    
         <>
-        <UserNavbar/>
+        <UserNavbar cartCount={cartCount}/>
         <Outlet/>
         </>
         )}

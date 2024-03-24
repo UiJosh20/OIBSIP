@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-const UserNavbar = () => {
+const UserNavbar = ({ cartCount }) => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
 
@@ -23,7 +23,6 @@ const UserNavbar = () => {
     let hash = 0;
     let i;
 
-    /* eslint-disable no-bitwise */
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -34,7 +33,6 @@ const UserNavbar = () => {
       const value = (hash >> (i * 8)) & 0xaf;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
 
     return color;
   }
@@ -47,6 +45,8 @@ const UserNavbar = () => {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
     };
   }
+
+  console.log(cartCount);
 
   return (
     <>
@@ -74,6 +74,11 @@ const UserNavbar = () => {
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">shopping_cart</span>
               <span>Cart</span>
+            {cartCount > 0 && (
+              <span className="bg-red-500 text-white px-2 py-1 rounded-full absolute -top-1 -right-1">
+                {cartCount}
+              </span>
+            )}
             </Link>
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">help</span>
@@ -91,7 +96,9 @@ const UserNavbar = () => {
               <Stack direction="row" spacing={2}>
                 <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
               </Stack>
-              <span className="material-symbols-outlined cursor-pointer">expand_more</span>
+              <span className="material-symbols-outlined cursor-pointer">
+                expand_more
+              </span>
             </div>
             <Menu
               id="basic-menu"
