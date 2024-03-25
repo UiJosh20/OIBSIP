@@ -54,13 +54,21 @@ const ProductDescription = () => {
   };
 
   const addToCart = () => {
-   axios.post(cartURL, {
-    Image: description.image_URL,
-    name: description.name,
-    price: description.price,
-    productId: description.id,
-    quantity: quantity
-  })
+    axios.post(
+      cartURL,
+      {
+        Image: description.image_URL,
+        name: description.name,
+        price: description.price,
+        productId: description.id,
+        quantity: quantity
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
   .then((res)=>{
       console.log(res.data);
   }).catch((err)=>{

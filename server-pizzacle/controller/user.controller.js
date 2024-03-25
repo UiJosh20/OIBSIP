@@ -425,8 +425,11 @@ const pizzaDisplay = (req, res) => {
 }
 
 const userCart = (req, res) => {
-  const { image, name, price, productId, quantity } = req.body;
-  const userId = req.user._id;
+  const { image, name, price, productId, quantity,} = req.body;
+  const token = req.headers.authorization.split(' ')[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
+  const userId = decoded.email;
+
 
   const newCartItem = {
     image,
@@ -442,7 +445,7 @@ const userCart = (req, res) => {
   )
     .then((cart) => {
       console.log("Product added to cart:", cart);
-      res.status(201).send(cart); // Optionally, you can send back the updated cart
+      res.status(201).send(cart);
     })
     .catch((error) => {
       console.error("Error adding product to cart:", error);
