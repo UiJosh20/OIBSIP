@@ -235,7 +235,6 @@ const verifyToken = (req, res) => {
     if (err) {
       console.error("Token verification failed:", err);
     } else {
-      console.log(decoded);
       console.log("Token verified successfully");
       res.send({
         message: "Token verified successfully",
@@ -430,7 +429,7 @@ const pizzaDisplay = (req, res) => {
 }
 
 const userCart = (req, res) => {
-  const { Image, name, price, productId, quantity,} = req.body;
+  const { image, name, price, productId, quantity,} = req.body;
   const token = req.headers.authorization.split(' ')[1];
   const decoded = jwt.verify(token, process.env.SECRET);
   const userId = decoded.email;
@@ -438,7 +437,7 @@ const userCart = (req, res) => {
  
 
   const newCartItem = {
-    Image,
+    image,
     name,
     price,
     productId,
