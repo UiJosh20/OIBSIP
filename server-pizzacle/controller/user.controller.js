@@ -7,7 +7,7 @@ const crypto = require("crypto");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
-const { ObjectId } = require('mongoose');
+
 
 
 
@@ -434,7 +434,7 @@ const userCart = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   const decoded = jwt.verify(token, process.env.SECRET);
   const userId = decoded.email;
-  const userIdObjectId = new ObjectId(userId);
+ 
 
   const newCartItem = {
     image,
@@ -444,13 +444,12 @@ const userCart = (req, res) => {
     quantity,
   };
   UserCart.findOneAndUpdate(
-    { userId: userIdObjectId },
+    { userId},
     { $push: { items: newCartItem } },
     { upsert: true, new: true }
   )
-    .then((cart) => {
-      console.log("Product added to cart:", cart);
-      res.status(201).send(cart);
+    .then((user) => {
+     console.log(user);
     })
     .catch((error) => {
       console.error("Error adding product to cart:", error);

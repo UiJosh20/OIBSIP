@@ -14,7 +14,7 @@ mongoose.connect(URI)
 let userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
-    email:{type: String, required: true, unique:true},
+    email:{type: String, required: true, u},nique:true
     password:{type:String, required: true},
     otp:{type: String, unique: true},
     otpExpiration:{
