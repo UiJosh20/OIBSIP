@@ -7,6 +7,11 @@ const crypto = require("crypto");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
+const { ObjectId } = require('mongoose');
+
+
+
+
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -429,7 +434,7 @@ const userCart = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
   const decoded = jwt.verify(token, process.env.SECRET);
   const userId = decoded.email;
-
+  const userIdObjectId = new ObjectId(userId);
 
   const newCartItem = {
     image,
@@ -439,7 +444,7 @@ const userCart = (req, res) => {
     quantity,
   };
   UserCart.findOneAndUpdate(
-    { userId },
+    { userId: userIdObjectId },
     { $push: { items: newCartItem } },
     { upsert: true, new: true }
   )
