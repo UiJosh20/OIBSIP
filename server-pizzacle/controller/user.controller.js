@@ -449,7 +449,7 @@ const userCart = (req, res) => {
     { upsert: true, new: true }
   )
   .then((cart) => {
-    console.log("Product added to cart:", cart);
+    console.log("Product added to cart");
     res.status(201).send(cart);
   })
   .catch((error) => {
