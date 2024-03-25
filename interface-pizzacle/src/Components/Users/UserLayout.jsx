@@ -5,7 +5,8 @@ import {Outlet} from "react-router-dom"
 
 const UserLayout = () => {
     const [loading, setLoading] = useState(true);
-    const [cartCount, setCartCount] = useState(0); 
+    const [cartCount, setCartCount] = useState(0);
+   
 
     useEffect(() => {
       const timer = setTimeout(() => {
@@ -14,8 +15,7 @@ const UserLayout = () => {
       return () => clearTimeout(timer);
     }, []);
 
-    
-  
+
     return (
         <>
         {loading ? (

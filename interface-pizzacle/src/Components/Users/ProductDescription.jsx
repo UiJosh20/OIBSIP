@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 const ProductDescription = () => {
   const { id } = useParams();
   const menuURL = "http://localhost:3000/user/pizzaMenu";
+  const cartURL = "http://localhost:3000/user/cart"
   const statesAPI =
     "https://api.census.gov/data/2019/acs/acs1?get=NAME&for=state:*";
 
@@ -19,7 +20,7 @@ const ProductDescription = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedState, setSelectedState] = useState("New York");
   const [states, setStates] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
+  
 
   useEffect(() => {
     axios
@@ -53,8 +54,18 @@ const ProductDescription = () => {
   };
 
   const addToCart = () => {
-    alert("added to cart");
-    setCartCount(cartCount + 1);
+   axios.post(cartURL, {
+    Image: description.image_URL,
+    name: description.name,
+    price: description.price,
+    productId: description.id,
+    quantity: quantity
+  })
+  .then((res)=>{
+      console.log(res.data);
+  }).catch((err)=>{
+    console.error(err);
+  })
   };
 
   const handleStateChange = (event) => {

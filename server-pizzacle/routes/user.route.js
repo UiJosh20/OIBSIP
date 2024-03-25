@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {userRegister, userLogin, verifyToken, forgotten, verifyOTP, createNewPassword, pizzaMenu, pizzaDisplay} = require("../controller/user.controller")
+const {userRegister, userLogin, verifyToken, forgotten, verifyOTP, createNewPassword, pizzaMenu, pizzaDisplay, userCart} = require("../controller/user.controller")
 
 router.post('/user/register', userRegister)
 router.post('/user/login', userLogin)
@@ -10,6 +10,7 @@ router.post('/user/createNewPassword', createNewPassword)
 router.post('/user/verifyToken', verifyToken)
 router.get('/user/pizzaMenu', pizzaMenu)
 router.get('/user/pizzaMenu/:id', pizzaDisplay)
+router.post('/user/cart', userCart)
 
 
 module.exports = router

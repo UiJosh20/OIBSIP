@@ -1,4 +1,5 @@
 const userModel = require("../model/user.model");
+const UserCart = require('../model/userCart.model');
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -423,6 +424,33 @@ const pizzaDisplay = (req, res) => {
   }
 }
 
+const userCart = (req, res) => {
+  const { image, name, price, productId, quantity } = req.body;
+  const userId = req.user._id;
+
+  const newCartItem = {
+    image,
+    name,
+    price,
+    productId,
+    quantity,
+  };
+  UserCart.findOneAndUpdate(
+    { userId },
+    { $push: { items: newCartItem } },
+    { upsert: true, new: true }
+  )
+    .then((cart) => {
+      console.log("Product added to cart:", cart);
+      res.status(201).send(cart); // Optionally, you can send back the updated cart
+    })
+    .catch((error) => {
+      console.error("Error adding product to cart:", error);
+      res.status(500).send({ error: "Internal Server Error" });
+    });
+
+}
+
 module.exports = {
   userRegister,
   userLogin,
@@ -432,4 +460,5 @@ module.exports = {
   verifyToken,
   pizzaMenu,
   pizzaDisplay,
+  userCart,
 };

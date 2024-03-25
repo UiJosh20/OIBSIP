@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-const UserNavbar = ({ cartCount }) => {
+const UserNavbar = () => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
 
@@ -46,7 +46,7 @@ const UserNavbar = ({ cartCount }) => {
     };
   }
 
-  console.log(cartCount);
+
 
   return (
     <>
@@ -71,15 +71,11 @@ const UserNavbar = ({ cartCount }) => {
           </span>
 
           <div className="space-x-10 flex items-center">
-            <Link to="/user/cart" className="flex items-center gap-2">
-              <span class="material-symbols-outlined">shopping_cart</span>
-              <span>Cart</span>
-            {cartCount > 0 && (
-              <span className="bg-red-500 text-white px-2 py-1 rounded-full absolute -top-1 -right-1">
-                {cartCount}
-              </span>
-            )}
-            </Link>
+          <Link to="/user/cart" className="flex items-center gap-2">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span>Cart</span>
+         
+        </Link>
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">help</span>
               <span>Help</span>
