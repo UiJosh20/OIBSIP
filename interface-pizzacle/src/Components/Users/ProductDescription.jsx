@@ -57,7 +57,7 @@ const ProductDescription = () => {
     axios.post(
       cartURL,
       {
-        Image: description.image_URL,
+        image: description.image_URL,
         name: description.name,
         price: description.price,
         productId: description.id,

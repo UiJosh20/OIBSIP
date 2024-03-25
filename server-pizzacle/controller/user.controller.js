@@ -430,14 +430,15 @@ const pizzaDisplay = (req, res) => {
 }
 
 const userCart = (req, res) => {
-  const { image, name, price, productId, quantity,} = req.body;
+  const { Image, name, price, productId, quantity,} = req.body;
   const token = req.headers.authorization.split(' ')[1];
   const decoded = jwt.verify(token, process.env.SECRET);
   const userId = decoded.email;
+
  
 
   const newCartItem = {
-    image,
+    Image,
     name,
     price,
     productId,
@@ -458,6 +459,25 @@ const userCart = (req, res) => {
   });
 }
 
+const cartDisplay = (req, res) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
+  const userId = decoded.email;
+
+  UserCart.findOne({ userId })
+  .then((cart)=>{
+    if (cart) {
+      res.status(200).json(cart);
+    } else {
+      res.status(404).json({ message: 'Cart not found' });
+    }
+  })
+  .catch((error) => {
+    console.error('Error fetching cart data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  });
+}
+
 module.exports = {
   userRegister,
   userLogin,
@@ -468,4 +488,5 @@ module.exports = {
   pizzaMenu,
   pizzaDisplay,
   userCart,
+  cartDisplay,
 };
