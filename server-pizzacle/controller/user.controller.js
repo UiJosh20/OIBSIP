@@ -448,14 +448,14 @@ const userCart = (req, res) => {
     { $push: { items: newCartItem } },
     { upsert: true, new: true }
   )
-    .then((user) => {
-     console.log(user);
-    })
-    .catch((error) => {
-      console.error("Error adding product to cart:", error);
-      res.status(500).send({ error: "Internal Server Error" });
-    });
-
+  .then((cart) => {
+    console.log("Product added to cart:", cart);
+    res.status(201).send(cart);
+  })
+  .catch((error) => {
+    console.error("Error adding product to cart:", error);
+    res.status(500).send({ error: "Internal Server Error" });
+  });
 }
 
 module.exports = {
