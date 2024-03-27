@@ -50,7 +50,7 @@ const UserNavbar = () => {
 
   return (
     <>
-      <nav className="bg-green-800 lg:py-1 text-white text-center">
+      <nav className="bg-green-800 lg:py-1 text-white text-center w-full">
         <small>We open at 9:00AM</small>
       </nav>
       <nav className="shadow-md lg:py-3 lg:px-10 flex justify-between items-center sticky top-0 bg-white z-10">

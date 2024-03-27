@@ -225,3 +225,15 @@ th{
   p{
     font-family: 'Instrument Sans', sans-serif;
   }
+
+  @media screen and (max-width: 480px) {
+    .motto{
+        padding: 15px;
+    }
+    .motto h1{
+      font-size: 40px;
+    }
+    .motto {
+      margin-top: 100px;
+    }
+  }

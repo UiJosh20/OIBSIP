@@ -437,7 +437,7 @@ const userCart = (req, res) => {
   UserCart.findOne({ userId })
     .then((cart) => {
       if (cart) {
-        const existingItem = cart.items.find((pizza) => pizza.productId === productId);
+        const existingItem = cart.items.find((pizza) => pizza.name === name);
         if (existingItem) {
           existingItem.quantity += quantity;
         } else {
