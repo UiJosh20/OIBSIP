@@ -429,34 +429,50 @@ const pizzaDisplay = (req, res) => {
 }
 
 const userCart = (req, res) => {
-  const { image, name, price, productId, quantity,} = req.body;
+  const { image, name, price, productId, quantity } = req.body;
   const token = req.headers.authorization.split(' ')[1];
-  const decoded = jwt.verify(token, process.env.SECRET);
-  const userId = decoded.email;
+  const user = jwt.verify(token, process.env.SECRET);
+  const userId = user.email;
 
- 
+  UserCart.findOne({ userId })
+    .then((cart) => {
+      if (cart) {
+        const existingItem = cart.items.find((pizza) => pizza.productId === productId);
+        if (existingItem) {
+          existingItem.quantity += quantity;
+        } else {
+          cart.items.push({ image, name, price, productId, quantity });
+        }
+        cart.save()
+          .then((updatedCart) => {
+            console.log("Product added/quantity updated in cart");
+            
+            res.status(201).send({message:"Pizza added successfully"},updatedCart);
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send({ error: "Internal Server Error" });
+          });
+      } else {
+        const newCart = new UserCart({ userId, items: [{ image, name, price, productId, quantity }] });
+        newCart.save()
+          .then((savedCart) => {
+            console.log("Product added to new cart");
 
-  const newCartItem = {
-    image,
-    name,
-    price,
-    productId,
-    quantity,
-  };
-  UserCart.findOneAndUpdate(
-    { userId},
-    { $push: { items: newCartItem } },
-    { upsert: true, new: true }
-  )
-  .then((cart) => {
-    console.log("Product added to cart");
-    res.status(201).send(cart);
-  })
-  .catch((error) => {
-    console.error("Error adding product to cart:", error);
-    res.status(500).send({ error: "Internal Server Error" });
-  });
-}
+            res.status(201).send(savedCart);
+          })
+          .catch((error) => {
+            console.error("Error saving new cart:", error);
+            res.status(500).send({ error: "Internal Server Error" });
+          });
+      }
+    })
+    .catch((error) => {
+      console.error("Error finding user cart:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+};
+
 
 const cartDisplay = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
