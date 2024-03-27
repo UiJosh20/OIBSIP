@@ -5,6 +5,7 @@
 
 .motto{
     padding: 100px;
+   
 }
 
 .motto h1{
@@ -225,7 +226,12 @@ th{
   p{
     font-family: 'Instrument Sans', sans-serif;
   }
+.bgImg{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.678)), url('https://res.cloudinary.com/dubaep0qz/image/upload/v1711560139/pizzacle/moe7jids6dvuw51lnmpl.jpg');
+  background-size: cover;
+  background-position: center;
 
+}
   @media screen and (max-width: 480px) {
     .motto{
         padding: 15px;
