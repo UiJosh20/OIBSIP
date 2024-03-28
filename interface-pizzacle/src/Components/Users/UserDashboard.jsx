@@ -68,9 +68,9 @@ const UserDashboard = () => {
 
   return (
     <>
-      <section className="bg-gray-200 h-full px-10 py-5">
-        <main className="bg-white p-20 pexels justify-center">
-          <h1 className="landingText text-white text-center mt-10 mb-10">
+      <section className="bg-gray-100 h-full lg:px-5 lg:py-5">
+        <main className="bg-white lg:p-20 p-10 pexels justify-center">
+          <h1 className="landingText text-white text-center mt-10 lg:mb-10 mb-20">
             PIZZACLE
           </h1>
           <div className="space-x-10 flex justify-center">
@@ -91,13 +91,13 @@ const UserDashboard = () => {
           </div>
         </main>
         <div ref={exploreRef}>
-          <main className="bg-white mt-10">
+          <main className="bg-white lg:mt-10">
             <div className="bg-green-900 w-full p-2 text-white text-center">
               <p>You have a big appetite?</p>
             </div>
-            <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
+            <div className=" h-fit flex justify-center flex-wrap lg:px-7 lg:bg-white bg-gray-200 px-4 lg:py-10 py-3 gap-5">
             {menu.map((pizza, i) => (
-                <Link to={`/user/description/${i}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+                <Link to={`/user/description/${i}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full !bg-white">
                   <img
                     className="w-full"
                     src={pizza.image_URL}

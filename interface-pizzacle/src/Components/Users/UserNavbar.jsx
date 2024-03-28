@@ -53,11 +53,11 @@ const UserNavbar = () => {
       <nav className="bg-green-800 lg:py-1 text-white text-center w-full">
         <small>We open at 9:00AM</small>
       </nav>
-      <nav className="shadow-md lg:py-3 lg:px-10 flex justify-between items-center sticky top-0 bg-white z-10">
+      <nav className="shadow-md lg:py-3 lg:px-10 px-4 py-2 flex justify-between items-center sticky top-0 bg-white z-10">
         <Link to="/user/dashboard">
           <h1 className="logop">PIZZACLE</h1>
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="lg:flex items-center gap-2 hidden">
           <div className="border-2 border-gray-200 rounded-md px-5">
             <input
               type="text"
@@ -111,6 +111,34 @@ const UserNavbar = () => {
             </Menu>
           </div>
         </div>
+          <div
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+              className="gap-2 items-center lg:hidden flex"
+            >
+              <Stack direction="row" spacing={2}>
+                <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
+              </Stack>
+              <span className="material-symbols-outlined cursor-pointer">
+                expand_more
+              </span>
+            </div>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Orders</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
       </nav>
     </>
   );
