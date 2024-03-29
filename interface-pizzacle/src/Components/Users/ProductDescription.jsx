@@ -82,12 +82,12 @@ const ProductDescription = () => {
 
   return (
     <>
-      <section className="bg-gray-200 h-screen px-5 py-5 flex gap-5">
-        <main className="bg-white lg:flex lg:items-center">
+      <section className="bg-gray-200 h-screen lg:px-5 lg:py-5 lg:flex block gap-5">
+        <main className="bg-white lg:flex lg:items-center ">
           <div>
             <img src={description.image_URL} alt="" />
           </div>
-          <div>
+          <div className=" lg:px-0 px-4" >
             <h1 className="text-3xl font-bold mb-3">{description.name}</h1>
             <p className="text-gray-500 mb-3">Price: ${description.price}</p>
             <p className="text-gray-500 mb-3">
@@ -108,7 +108,7 @@ const ProductDescription = () => {
                 +
               </button>
             </div>
-            <div className="pe-10">
+            <div className="lg:pe-10 ">
               <Button
                 variant="contained"
                 onClick={addToCart}

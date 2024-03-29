@@ -1,5 +1,5 @@
 const userModel = require("../model/user.model");
-const UserCart = require('../model/userCart.model');
+const UserCart = require("../model/userCart.model");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -7,11 +7,6 @@ const crypto = require("crypto");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
-
-
-
-
-
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -201,7 +196,6 @@ const verifyOTP = (req, res) => {
     });
 };
 
-
 const createNewPassword = (req, res) => {
   const { email, password } = req.body;
   bcrypt.hash(password, 10, (err, hashedPassword) => {
@@ -251,100 +245,112 @@ const pizzaList = [
   {
     id: 1,
     name: "Margherita",
-    description: "A classic pizza with tomato sauce, mozzarella cheese, and basil.",
+    description:
+      "A classic pizza with tomato sauce, mozzarella cheese, and basil.",
     price: 10,
-    image_URL: "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png"
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png",
   },
   {
     id: 2,
     name: "Pepperoni",
     description: "A pizza with tomato sauce, mozzarella cheese, and pepperoni.",
     price: 12,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
   },
   {
     id: 3,
     name: "Hawaiian",
-    description: "A pizza with tomato sauce, mozzarella cheese, and ham and pineapple.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and ham and pineapple.",
     price: 15,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711025368/pizzacle/hyk9ohyu2yjhqypet593.png",
   },
   {
     id: 4,
     name: "Veggie",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various vegetables.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various vegetables.",
     price: 13,
-         image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
   },
   {
     id: 5,
     name: "Meat Lovers",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various meats.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats.",
     price: 14,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711025368/pizzacle/hyk9ohyu2yjhqypet593.png",
   },
   {
     id: 6,
     name: "Cheese",
-    description: "A pizza with tomato sauce, mozzarella cheese, and extra cheese.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and extra cheese.",
     price: 11,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png",
   },
   {
     id: 7,
     name: "BBQ Chicken",
-    description: "A pizza with tomato sauce, mozzarella cheese, and barbecue chicken.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and barbecue chicken.",
     price: 16,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
   },
   {
     id: 7,
     name: "Chicken Tikka",
-    description: "A pizza with tomato sauce, mozzarella cheese, and chicken tikka.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and chicken tikka.",
     price: 17,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png",
   },
   {
     id: 8,
     name: "Mexican Green Wave",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
     price: 18,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
   },
   {
     id: 9,
     name: "Mexican Red Wave",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
     price: 20,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+       image_URL: "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png"
 
   },
   {
     id: 10,
     name: "Mexican Yellow Wave",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
     price: 20,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
   },
 
   {
     id: 11,
     name: "Mexican Blue Wave",
-    description: "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats and vegetables.",
     price: 20,
-    image_URL:"https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
-
-  }
-]
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+  },
+];
 
 const sideDish = [
   {
@@ -352,37 +358,37 @@ const sideDish = [
     name: "Garlic Bread",
     description: "A classic bread with garlic butter.",
     price: 5,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 2,
-    name:"French Fries",
-    description:"Fried irish potatoes",
+    name: "French Fries",
+    description: "Fried irish potatoes",
     price: 10,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 3,
-    name:"Chicken Wings",
-    description:"Fried chicken wings",
+    name: "Chicken Wings",
+    description: "Fried chicken wings",
     price: 15,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 4,
-    name:"Cacio e pepe",
-    description:"A combination of pasta and vegetables",
-    price:'24',
-    image_URL:"",
+    name: "Cacio e pepe",
+    description: "A combination of pasta and vegetables",
+    price: "24",
+    image_URL: "",
   },
   {
     id: 5,
     name: "Caesar Salad",
-    description:'A romanian salad',
-    price:'20',
-    image_URL:"",
-  }
-]
+    description: "A romanian salad",
+    price: "20",
+    image_URL: "",
+  },
+];
 
 const drinks = [
   {
@@ -390,47 +396,46 @@ const drinks = [
     name: "Coca Cola",
     description: "A carbonated soft drink",
     price: 5,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 2,
     name: "Pepsi",
     description: "A carbonated soft drink",
     price: 5,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 3,
     name: "Sprite",
     description: "A carbonated soft drink",
     price: 5,
-    image_URL:"",
+    image_URL: "",
   },
   {
     id: 4,
     name: "Fanta",
     description: "A carbonated soft drink",
     price: 5,
-    image_URL:"",
+    image_URL: "",
   },
-
-]
+];
 const pizzaMenu = (req, res) => {
   res.send(pizzaList);
-}
+};
 const pizzaDisplay = (req, res) => {
   const id = parseInt(req.params.id);
-  const pizza = pizzaList.find(pizza => pizza.id === id);
+  const pizza = pizzaList.find((pizza) => pizza.id === id);
   if (!pizza) {
-      res.status(404).json({ error: 'Van not found' });
+    res.status(404).json({ error: "Van not found" });
   } else {
-      res.send(pizza);
+    res.send(pizza);
   }
-}
+};
 
 const userCart = (req, res) => {
   const { image, name, price, productId, quantity } = req.body;
-  const token = req.headers.authorization.split(' ')[1];
+  const token = req.headers.authorization.split(" ")[1];
   const user = jwt.verify(token, process.env.SECRET);
   const userId = user.email;
 
@@ -443,19 +448,26 @@ const userCart = (req, res) => {
         } else {
           cart.items.push({ image, name, price, productId, quantity });
         }
-        cart.save()
+        cart
+          .save()
           .then((updatedCart) => {
             console.log("Product added/quantity updated in cart");
-            
-            res.status(201).send({message:"Pizza added successfully"},updatedCart);
+
+            res
+              .status(201)
+              .send({ message: "Pizza added successfully" }, updatedCart);
           })
           .catch((error) => {
             console.error(error);
             res.status(500).send({ error: "Internal Server Error" });
           });
       } else {
-        const newCart = new UserCart({ userId, items: [{ image, name, price, productId, quantity }] });
-        newCart.save()
+        const newCart = new UserCart({
+          userId,
+          items: [{ image, name, price, productId, quantity }],
+        });
+        newCart
+          .save()
           .then((savedCart) => {
             console.log("Product added to new cart");
 
@@ -473,25 +485,24 @@ const userCart = (req, res) => {
     });
 };
 
-
 const cartDisplay = (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
+  const token = req.headers.authorization.split(" ")[1];
   const decoded = jwt.verify(token, process.env.SECRET);
   const userId = decoded.email;
 
   UserCart.findOne({ userId })
-  .then((cart)=>{
-    if (cart) {
-      res.status(200).json(cart);
-    } else {
-      res.status(404).json({ message: 'Cart not found' });
-    }
-  })
-  .catch((error) => {
-    console.error('Error fetching cart data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  });
-}
+    .then((cart) => {
+      if (cart) {
+        res.status(200).json(cart);
+      } else {
+        res.status(404).json({ message: "Cart not found" });
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching cart data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+};
 
 module.exports = {
   userRegister,

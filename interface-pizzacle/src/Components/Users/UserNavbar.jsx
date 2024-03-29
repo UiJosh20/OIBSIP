@@ -46,8 +46,6 @@ const UserNavbar = () => {
     };
   }
 
-
-
   return (
     <>
       <nav className="bg-green-800 lg:py-1 text-white text-center w-full">
@@ -71,11 +69,10 @@ const UserNavbar = () => {
           </span>
 
           <div className="space-x-10 flex items-center">
-          <Link to="/user/cart" className="flex items-center gap-2">
-          <span class="material-symbols-outlined">shopping_cart</span>
-          <span>Cart</span>
-         
-        </Link>
+            <Link to="/user/cart" className="flex items-center gap-2">
+              <span class="material-symbols-outlined">shopping_cart</span>
+              <span>Cart</span>
+            </Link>
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">help</span>
               <span>Help</span>
@@ -111,34 +108,37 @@ const UserNavbar = () => {
             </Menu>
           </div>
         </div>
-          <div
-              id="basic-button"
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-              className="gap-2 items-center lg:hidden flex"
-            >
-              <Stack direction="row" spacing={2}>
-                <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
-              </Stack>
-              <span className="material-symbols-outlined cursor-pointer">
-                expand_more
-              </span>
-            </div>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Orders</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
+        <div
+          id="basic-button"
+          aria-controls={open ? "basic-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          className="gap-5 items-center lg:hidden flex"
+        >
+          <Stack direction="row" spacing={2}>
+            <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
+          </Stack>
+          <span
+            class="material-symbols-outlined cursor-pointer"
+            onClick={handleClick}
+          >
+            menu
+          </span>
+        </div>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>Orders</MenuItem>
+          <MenuItem onClick={handleClose}>Help</MenuItem>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Menu>
       </nav>
     </>
   );

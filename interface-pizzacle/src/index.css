@@ -41,7 +41,7 @@ th{
 }
 
 .pexels{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.678)), url('/src/assets/pexels.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.678)), url('https://res.cloudinary.com/dubaep0qz/image/upload/v1711739051/pizzacle/mwn7uhnuobms5k2wubnd.jpg');
     background-size: cover;
     height: 500px;
 }
