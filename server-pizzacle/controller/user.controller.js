@@ -82,7 +82,7 @@ const userLogin = (req, res) => {
       bcrypt.compare(password, user.password, (err, match) => {
         if (err) {
           console.error("Error comparing passwords:", err);
-          return res.status(500).json({ message: "Internal Server Error" });
+          return res.status(500).json({ message: "No internet connection or Slow internet connection" });
         }
 
         if (!match) {
