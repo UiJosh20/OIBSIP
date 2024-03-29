@@ -115,6 +115,10 @@ const UserNavbar = () => {
           aria-expanded={open ? "true" : undefined}
           className="gap-5 items-center lg:hidden flex"
         >
+          <span class="material-symbols-outlined">search</span>
+          <Link to="/user/cart">
+            <span class="material-symbols-outlined">shopping_cart</span>
+          </Link>
           <Stack direction="row" spacing={2}>
             <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
           </Stack>

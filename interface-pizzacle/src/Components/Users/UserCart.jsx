@@ -1,11 +1,12 @@
 import { Alert } from "@mui/material";
 import axios from "axios"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 const UserCart = () => {
   const cartDisplayURL = "http://localhost:3000/user/displayCart"
   const [cartData, setCartData] = useState(null);
+  const exploreRef = useRef(null);
  useEffect(() => {
 axios.get(
   cartDisplayURL,
@@ -24,10 +25,14 @@ console.log(err)
  
 
  }, [])
+
+ const handleExploreClick = () => {
+  exploreRef.current.scrollIntoView({ behavior: "smooth" });
+};
  
   return (
     <>
-        <section className="bg-gray-100 lg:px-10 lg:py-5 lg:flex gap-4">
+        <section className="bg-gray-100 lg:px-10 lg:py-5 lg:flex gap-4 px-3">
         
         <div className="w-full">
       {cartData && cartData.items.map(item => (
@@ -41,11 +46,16 @@ console.log(err)
         </div>
       ))}
     </div>
-    <div className="bg-white lg:w-96">
-        <div className="border-b border-gray-200 lg:p-3">
+    <div className="lg:hidden block">
+    <span class="material-symbols-outlined text-5xl fixed top-96 left-80" onClick={handleExploreClick}>
+arrow_drop_down_circle
+</span>
+    </div>
+    <div className="bg-white lg:w-96" ref={exploreRef}>
+        <div className="border-b border-gray-200 lg:p-3 p-3">
           <p>CART SUMMARY</p>
         </div>
-        <div className="lg:p-3">
+        <div className="lg:p-3 p-3">
           <p>item total</p>
         </div>
     </div>

@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const ProductDescription = () => {
   const { id } = useParams();
@@ -85,6 +85,7 @@ const ProductDescription = () => {
       <section className="bg-gray-200 h-screen lg:px-5 lg:py-5 lg:flex block gap-5">
         <main className="bg-white lg:flex lg:items-center ">
           <div>
+      <Link to='/user/dashboard' className="lg:px-10 px-5 underline">Go back to Shop</Link>
             <img src={description.image_URL} alt="" />
           </div>
           <div className=" lg:px-0 px-4" >

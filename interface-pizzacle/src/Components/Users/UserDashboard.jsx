@@ -7,7 +7,7 @@ const UserDashboard = () => {
   const [tokenMatch, setTokenMatch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState([])
-  const exploreRef = useRef(null);
+    const exploreRef = useRef(null);
 
 
   const TokenURL = "http://localhost:3000/user/verifyToken";
@@ -62,9 +62,9 @@ const UserDashboard = () => {
     };
   }, [navigate, loading]);
 
-  const handleExploreClick = () => {
-    exploreRef.current.scrollIntoView({ behavior: "smooth" });
-  };
+    const handleExploreClick = () => {
+      exploreRef.current.scrollIntoView({ behavior: "smooth" });
+    };
 
   return (
     <>
