@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 const UserCart = () => {
   const cartDisplayURL = "http://localhost:3000/user/displayCart"
   const [cartData, setCartData] = useState(null);
+  const [cartAmount, setCartAmount] = useState(null);
   const exploreRef = useRef(null);
  useEffect(() => {
 axios.get(
@@ -17,7 +18,8 @@ axios.get(
   }
 )
 .then((res)=>{
-console.log(res.data)
+console.log(res.data.items.length)
+setCartAmount(res.data.items.length)
 setCartData(res.data)
 }).catch((err)=>{
 console.log(err)
@@ -55,8 +57,9 @@ arrow_drop_down_circle
         <div className="border-b border-gray-200 lg:p-3 p-3">
           <p>CART SUMMARY</p>
         </div>
-        <div className="lg:p-3 p-3">
+        <div className="lg:px-3 lg:py-2 p-3 flex justify-between">
           <p>item total</p>
+          <p>{cartAmount}</p>
         </div>
     </div>
         </section>

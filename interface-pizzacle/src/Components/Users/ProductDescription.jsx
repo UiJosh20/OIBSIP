@@ -20,6 +20,7 @@ const ProductDescription = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedState, setSelectedState] = useState("New York");
   const [states, setStates] = useState([]);
+  const [successfulMsg, setSuccessfullMsg] = useState(null);
   
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const ProductDescription = () => {
     )
   .then((res)=>{
       console.log(res.data);
+      setSuccessfullMsg(res.data.message);
   }).catch((err)=>{
     console.error(err);
   })

@@ -454,8 +454,8 @@ const userCart = (req, res) => {
             console.log("Product added/quantity updated in cart");
 
             res
-              .status(201)
-              .send({ message: "Pizza added successfully" }, updatedCart);
+              .status(200)
+              .send({ message: "Pizza added successfully" });
           })
           .catch((error) => {
             console.error(error);
