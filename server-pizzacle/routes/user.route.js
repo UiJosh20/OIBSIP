@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {userRegister, userLogin, verifyToken, forgotten, verifyOTP, createNewPassword, pizzaMenu, pizzaDisplay, userCart, cartDisplay} = require("../controller/user.controller")
+const {userRegister, userLogin, verifyToken, forgotten, verifyOTP, createNewPassword, pizzaMenu, pizzaDisplay, userCart, cartDisplay, deleteCartItem} = require("../controller/user.controller")
 
 router.post('/user/register', userRegister)
 router.post('/user/login', userLogin)
@@ -12,6 +12,7 @@ router.get('/user/pizzaMenu', pizzaMenu)
 router.get('/user/pizzaMenu/:id', pizzaDisplay)
 router.post('/user/cart', userCart)
 router.get('/user/displayCart', cartDisplay)
+router.delete('/user/cart/:id', deleteCartItem)
 
 
 

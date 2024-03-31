@@ -504,6 +504,33 @@ const cartDisplay = (req, res) => {
     });
 };
 
+const deleteCartItem = (req, res) => {
+  const token = req.headers.authorization.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.SECRET);
+  const userId = decoded.email;
+  const productId = req.params.id;
+
+
+
+  UserCart.findOneAndUpdate(
+    { userId },
+    { $pull: { items: { productId: productId} } },
+    { new: true }
+  )
+  .then((updatedCart) => {
+    if (updatedCart) {
+      res.status(200).json({ message: "Item deleted from cart successfully" });
+      console.log("item deleted successfully")
+    } else {
+      res.status(404).json({ message: "User or item not found" });
+    }
+  })
+  .catch((error) => {
+    console.error("Error deleting item from cart:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  });
+};
+
 module.exports = {
   userRegister,
   userLogin,
@@ -515,4 +542,5 @@ module.exports = {
   pizzaDisplay,
   userCart,
   cartDisplay,
+  deleteCartItem,
 };

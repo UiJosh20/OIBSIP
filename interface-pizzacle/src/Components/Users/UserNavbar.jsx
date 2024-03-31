@@ -13,16 +13,18 @@ const UserNavbar = () => {
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
   const [cartBadge, setCartBadge] = useState(null)
 
- 
-    axios.get(cartDisplayURL,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      })
-    .then((res)=>{
-      setCartBadge(res.data.items.length)
+useEffect(() => {
+  axios.get(cartDisplayURL,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     })
+  .then((res)=>{
+    setCartBadge(res.data.items.length)
+  })
+},[])
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
