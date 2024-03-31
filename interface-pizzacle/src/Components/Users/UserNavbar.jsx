@@ -7,24 +7,23 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
-const UserNavbar = () => {
+const UserNavbar = ({ updateCartBadge }) => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
-  const [cartBadge, setCartBadge] = useState(null)
+  const [cartBadge, setCartBadge] = useState("");
 
-useEffect(() => {
-  axios.get(cartDisplayURL,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-  .then((res)=>{
-    setCartBadge(res.data.items.length)
-  })
-},[])
-
+  useEffect(() => {
+    axios
+      .get(cartDisplayURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setCartBadge(res.data.items.length);
+      });
+  });
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -88,9 +87,11 @@ useEffect(() => {
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">shopping_cart</span>
               <span>Cart</span>
-              <div className="text-white bg-green-600 rounded-full px-1 font-bold ">
-               <p>{cartBadge}</p> 
-              </div>
+              {cartBadge > 0 && (
+                <div className="text-white bg-green-600 rounded-full px-1 font-bold">
+                  <p>{cartBadge}</p>
+                </div>
+              )}
             </Link>
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">help</span>

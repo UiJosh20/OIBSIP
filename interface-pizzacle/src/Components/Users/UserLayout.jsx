@@ -1,19 +1,32 @@
 import { useEffect, useState } from "react";
 import UserNavbar from "./UserNavbar"
 import {Outlet} from "react-router-dom"
+import axios from "axios";
 
 
 const UserLayout = () => {
     const [loading, setLoading] = useState(true);
-    const [cartCount, setCartCount] = useState(0);
-   
+    const cartDisplayURL = "http://localhost:3000/user/displayCart";
+    const [cartBadge, setCartBadge] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
+    axios
+      .get(cartDisplayURL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setCartBadge(res.data.items.length);
+      });
       const timer = setTimeout(() => {
         setLoading(false);
       }, 4500);
       return () => clearTimeout(timer);
-    }, []);
+  
+  }, []);
+
+
 
 
     return (
@@ -29,8 +42,8 @@ const UserLayout = () => {
           </div>
         ) : (    
         <>
-        <UserNavbar cartCount={cartCount}/>
-        <Outlet/>
+        <UserNavbar updateCartBadge={setCartBadge} />
+        <Outlet />
         </>
         )}
         </>

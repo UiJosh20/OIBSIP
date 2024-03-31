@@ -22,6 +22,7 @@ const ProductDescription = () => {
   const [states, setStates] = useState([]);
   const [successfulMsg, setSuccessfullMsg] = useState(null);
   
+  
 
   useEffect(() => {
     axios
@@ -73,6 +74,7 @@ const ProductDescription = () => {
   .then((res)=>{
       console.log(res.data);
       setSuccessfullMsg(res.data.message);
+      updateCartBadge(prevBadge => prevBadge + 1);
   }).catch((err)=>{
     console.error(err);
   })

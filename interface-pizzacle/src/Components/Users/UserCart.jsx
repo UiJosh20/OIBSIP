@@ -28,11 +28,10 @@ const UserCart = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  });
 
 
   const handleDeleteItemClick = (productId) => {
-    // Function to delete the item from the cart
     axios
       .delete(`http://localhost:3000/user/cart/${productId}`, {
         headers: {
@@ -40,7 +39,6 @@ const UserCart = () => {
         },
       })
       .then((res) => {
-        // If successful, update the cart data
         setCartData((prevData) => ({
           ...prevData,
           items: prevData.items.filter((item) => item.productId !== productId),
