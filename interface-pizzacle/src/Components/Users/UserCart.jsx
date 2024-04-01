@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { CardElement, useStripe } from "@stripe/react-stripe-js";
 
 const style = {
   position: 'absolute',
@@ -21,13 +22,17 @@ const style = {
 
 const UserCart = () => {
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
+  const paymentUrl =  "http://localhost:3000/user/checkout"
   const [cartData, setCartData] = useState(null);
   const [cartAmount, setCartAmount] = useState(0);
   const [cartPrices, setCartPrices] = useState(0);
+  const [error, setError] = useState(null);
   const exploreRef = useRef(null);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const stripe = useStripe();
+
 
   
 
@@ -39,7 +44,6 @@ const UserCart = () => {
         },
       })
       .then((res) => {
-      console.log(res.data.items[0])
         setCartAmount(res.data.items.length);
         setCartData(res.data);
         const totalPrice = res.data.items.reduce(
@@ -77,8 +81,37 @@ const UserCart = () => {
   };
 
   const checkOut = () => {
-    
-  }
+    axios
+      .post(
+        paymentUrl,
+        {
+          cartItems: cartData.items,
+          totalPrice: cartPrices,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((response) => {
+        const { data } = response;
+        const { sessionId } = data;
+        stripe.redirectToCheckout({
+          sessionId: sessionId,
+        }).then((result) => {
+          if (result.error) {
+            setError(result.error.message);
+            console.error("Error redirecting to checkout:", result.error);
+          }
+        });
+      })
+      .catch((error) => {
+        setError("An error occurred during checkout.");
+        console.error("Checkout error:", error);
+      });
+  };
+  
 
   return (
     <>

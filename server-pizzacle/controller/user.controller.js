@@ -7,6 +7,8 @@ const crypto = require("crypto");
 const MAILEREMAIL = process.env.MAILEREMAIL;
 const MAILERPASS = process.env.MAILERPASS;
 const secret = process.env.SECRET;
+const stripe = require('stripe')(process.env.PAYMENT_APIKEY)
+
 
 const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000);
@@ -531,9 +533,37 @@ const deleteCartItem = (req, res) => {
   });
 };
 
-const checkOut = ( req, res)=> {
-  
-}
+const checkOut = (req, res) => {
+  const { cartItems, totalPrice } = req.body; 
+
+
+  const lineItems = cartItems.map(item => ({
+    price_data: {
+      currency: 'usd',
+      product_data: {
+        name: item.name,
+        images: [item.image_URL],
+      },
+      unit_amount: item.price * 100,
+    },
+    quantity: item.quantity,
+  }));
+
+  stripe.checkout.sessions.create({
+    line_items: lineItems,
+    payment_method_types: ['card'],
+    mode: 'payment',
+    success_url: 'http://localhost:3000/success',
+    cancel_url: 'http://localhost:3000/cancel',
+  })
+  .then(session => {
+    res.status(200).json({ sessionId: session.id });
+  })
+  .catch(error => {
+    console.error('Error creating checkout session:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  });
+};
 
 
 module.exports = {

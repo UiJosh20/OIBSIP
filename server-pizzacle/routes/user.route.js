@@ -13,7 +13,7 @@ router.get('/user/pizzaMenu/:id', pizzaDisplay)
 router.post('/user/cart', userCart)
 router.get('/user/displayCart', cartDisplay)
 router.delete('/user/cart/:id', deleteCartItem)
-router.delete('/user/checkout', checkOut)
+router.post('/user/checkout', checkOut)
 
 
 

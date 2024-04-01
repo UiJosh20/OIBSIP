@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom';
+
 import Landing from './Components/Layout/Landing'
 import Home from './Components/Layout/Home'
 import UserLayout from './Components/Users/UserLayout'
@@ -21,13 +22,13 @@ import UserProduct from './Components/Users/UserProduct'
 import UserCheckout from './Components/Users/UserCheckout'
 
 
-function App() {
 
+function App() {
 
   return (
     <>
+         
       <Routes>
-
         {/* Landing page */}
         <Route path="/" element={<Landing />} >
           <Route path='/' element={<Navigate to='/home' />} />
@@ -49,7 +50,9 @@ function App() {
           <Route path='/user/dashboard' element={<UserDashboard />} />
           <Route path='/user/product' element={<UserProduct />} />
           <Route path='/user/description/:id' element={<ProductDescription/>} />
+     
           <Route path='/user/cart' element={<UserCart />} />
+     
         </Route>
 
 
@@ -64,6 +67,7 @@ function App() {
         </Route>
 
       </Routes>
+    
     </>
   )
 }

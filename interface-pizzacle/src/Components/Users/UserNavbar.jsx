@@ -14,6 +14,7 @@ const UserNavbar = () => {
   const navigate = useNavigate();
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
   const [cartBadge, setCartBadge] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchCartItems = () => {
@@ -34,6 +35,14 @@ const UserNavbar = () => {
     const interval = setInterval(fetchCartItems, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    console.log("Searching for:", searchQuery);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,13 +97,14 @@ const UserNavbar = () => {
           <div className="border-2 border-gray-200 rounded-md px-5">
             <input
               type="text"
+              onChange={handleSearchChange}
               placeholder="Search for pizza, side dish and drinks"
               className="outline-none border-none p-2"
             />
           </div>
 
           <span className="bg-green-700 w-full p-2 rounded-md text-white text-center shadow-md me-10">
-            <button>Search</button>
+            <button onClick={handleSearchSubmit}>Search</button>
           </span>
 
           <div className="space-x-8 flex items-center">
