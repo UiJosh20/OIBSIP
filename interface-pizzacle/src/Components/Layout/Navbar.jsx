@@ -1,37 +1,23 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import { ListItem, ListItemButton, ListItemIcon } from "@mui/material";
+
+import { Menu, MenuItem } from "@mui/material";
 
 const Navbar = () => {
-  const [open, setOpen] = React.useState(false);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
-  const DrawerList = (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      className="!w-48 "
-    >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon></ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+ 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -44,20 +30,35 @@ const Navbar = () => {
         </Link>
 
         <div className="lg:hidden block">
-          <span
-            class="material-symbols-outlined cursor-pointer"
-            onClick={toggleDrawer(true)}
+          <div
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            className="flex space-x-3 items-center"
           >
-            menu
-          </span>
+            <span
+              class="material-symbols-outlined cursor-pointer"
+              onClick={toggleDrawer(true)}
+            >
+              menu
+            </span>
 
-          <Drawer
-            open={open}
-            onClose={toggleDrawer(false)}
-            className="lg:hidden bloc"
-          >
-            {DrawerList}
-          </Drawer>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Orders</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </div>
         </div>
         <div className="space-x-5 lg:block hidden">
           <Link to="/blog" className="homelink">

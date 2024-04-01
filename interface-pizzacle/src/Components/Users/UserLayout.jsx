@@ -1,53 +1,67 @@
 import { useEffect, useState } from "react";
-import UserNavbar from "./UserNavbar"
-import {Outlet} from "react-router-dom"
+import UserNavbar from "./UserNavbar";
+import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
 const UserLayout = () => {
-    const [loading, setLoading] = useState(true);
-    const cartDisplayURL = "http://localhost:3000/user/displayCart";
-    const [cartBadge, setCartBadge] = useState("");
+  const TokenURL = "http://localhost:3000/user/verifyToken";
+  const [loading, setLoading] = useState(true);
+  const [tokenMatch, setTokenMatch] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(cartDisplayURL, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setCartBadge(res.data.items.length);
-      });
-      const timer = setTimeout(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
         setLoading(false);
-      }, 4500);
-      return () => clearTimeout(timer);
-  
-  }, []);
+        navigate("/user/login");
+        return; // Exit early if token is not present
+      }
+
+      axios
+        .post(TokenURL, { token })
+        .then((response) => {
+          if (token === response.data.token) {
+            setLoading(false);
+            setTokenMatch(true);
+          } else {
+            console.log("Token doesn't match");
+            setLoading(false); // Set loading to false regardless of token match
+            setTokenMatch(false);
+            navigate("/user/login");
+          }
+        })
+        .catch((error) => {
+          console.error("Error verifying token:", error);
+          setLoading(false);
+          setTokenMatch(false);
+          navigate("/user/login");
+        });
+    };
+    checkToken();
 
 
+  }, [navigate]);
 
-
-    return (
-        <>
-        {loading ? (
-          <div className="flex justify-center items-center h-screen flex-col bg-black">
-            <p className="logo1 !text-5xl mb-10 text-white">PIZZACLE</p>
-            <div class="three-body">
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-              <div class="three-body__dot"></div>
-            </div>
+  return (
+    <>
+      {loading ? (
+        <div className="flex justify-center items-center h-screen flex-col bg-black">
+          <p className="logo1 !text-5xl mb-10 text-white">PIZZACLE</p>
+          <div className="three-body">
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
           </div>
-        ) : (    
+        </div>
+      ) : (
         <>
-        <UserNavbar updateCartBadge={setCartBadge} />
-        <Outlet />
+          <UserNavbar />
+          <Outlet />
         </>
-        )}
-        </>
-    )
-}
+      )}
+    </>
+  );
+};
 
-export default UserLayout
+export default UserLayout;

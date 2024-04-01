@@ -6,33 +6,44 @@ import Stack from "@mui/material/Stack";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
+import { Badge } from "@mui/material";
 
-const UserNavbar = ({ updateCartBadge }) => {
+const UserNavbar = () => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
   const [cartBadge, setCartBadge] = useState("");
 
-  useEffect(() => {
-    axios
-      .get(cartDisplayURL, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setCartBadge(res.data.items.length);
-      });
-  });
 
+    useEffect(() => {
+      const fetchCartItems = () => {
+        axios
+          .get(cartDisplayURL, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            setCartBadge(res.data.items.length);
+          })
+          .catch((error) => {
+            console.error("Error fetching cart items:", error);
+          });
+      };
+      fetchCartItems();
+      const interval = setInterval(fetchCartItems, 1000);
+      return () => clearInterval(interval);
+    }, []);
+
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   function stringToColor(string) {
     let hash = 0;
@@ -88,9 +99,8 @@ const UserNavbar = ({ updateCartBadge }) => {
               <span class="material-symbols-outlined">shopping_cart</span>
               <span>Cart</span>
               {cartBadge > 0 && (
-                <div className="text-white bg-green-600 rounded-full px-1 font-bold">
-                  <p>{cartBadge}</p>
-                </div>
+                <Badge badgeContent={cartBadge}  color="success" className="ms-2">
+                </Badge>
               )}
             </Link>
             <Link to="/user/cart" className="flex items-center gap-2">

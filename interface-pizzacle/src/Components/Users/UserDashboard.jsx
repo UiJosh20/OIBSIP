@@ -10,46 +10,11 @@ const UserDashboard = () => {
     const exploreRef = useRef(null);
 
 
-  const TokenURL = "http://localhost:3000/user/verifyToken";
+
   const menuURL = 'http://localhost:3000/user/pizzaMenu';
   const navigate = useNavigate();
   useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setLoading(false);
-        navigate("/user/login");
-      }
 
-      axios
-        .post(TokenURL, { token })
-        .then((response) => {
-          if (token === response.data.token) {
-            setLoading(false);
-            setTokenMatch(true);
-          } else {
-            console.log("Token doesn't match");
-            navigate("/user/login");
-            setLoading(true);
-            setTokenMatch(false);
-          }
-        })
-        .catch((error) => {
-          console.error("Error verifying token:", error);
-          setLoading(false);
-          setTokenMatch(false);
-          navigate("/user/login");
-        });
-    };
-
-    const timeout = setTimeout(() => {
-      if (loading) {
-        setLoading(false);
-        navigate("/user/login");
-      }
-    }, 3000);
-
-    checkToken();
 
     axios.get(menuURL)
     .then((response) => {
@@ -57,9 +22,7 @@ const UserDashboard = () => {
 
     })
 
-    return () => {
-      clearTimeout(timeout);
-    };
+ 
   }, [navigate, loading]);
 
     const handleExploreClick = () => {

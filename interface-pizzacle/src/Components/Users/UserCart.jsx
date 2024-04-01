@@ -1,12 +1,13 @@
-import { Alert } from "@mui/material";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import Delete from "@mui/icons-material/Delete";
 
 const UserCart = () => {
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
   const [cartData, setCartData] = useState(null);
-  const [cartAmount, setCartAmount] = useState(null);
-  const [cartPrices, setCartPrices] = useState(null);
+  const [cartAmount, setCartAmount] = useState(0);
+  const [cartPrices, setCartPrices] = useState(0);
   const exploreRef = useRef(null);
   useEffect(() => {
     axios
@@ -55,7 +56,7 @@ const UserCart = () => {
 
   return (
     <>
-      <section className="bg-gray-100 lg:px-10 lg:py-5 lg:flex gap-4 px-3">
+      <section className="bg-white lg:px-10 lg:py-5 lg:flex gap-4 px-3 h-fit">
         <div className="w-full">
           {cartData &&
             cartData.items.map((item) => (
@@ -68,13 +69,12 @@ const UserCart = () => {
                   <h1 className="text-xl font-bold mb-3">{item.name}</h1>
                   <p>$ {item.price}</p>
                   <p>Quantity: &nbsp; {item.quantity}</p>
+               <DeleteIcon onClick={() => handleDeleteItemClick(item.productId)} className=" moveIcon"/>
+
+                <DeleteIcon onClick={() => handleDeleteItemClick(item.productId)} className="moveIcon2"/>
                 </div>
-                <button
-                    onClick={() => handleDeleteItemClick(item.productId)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md"
-                  >
-                    Delete
-                  </button>
+          
+                  
               </div>
             ))}
         </div>
@@ -86,7 +86,7 @@ const UserCart = () => {
             arrow_drop_down_circle
           </span>
         </div>
-        <div className="bg-white lg:w-96 lg:h-80" ref={exploreRef}>
+        <div className="bg-white lg:w-96 lg:h-80 sticky top-20 border " ref={exploreRef}>
           <div className="border-b border-gray-200 lg:p-3 p-3">
             <p>CART SUMMARY</p>
           </div>
@@ -98,6 +98,9 @@ const UserCart = () => {
           <div className="lg:px-3 lg:py-2 p-3 flex justify-between">
             <p>Price total</p>
             <p>$&nbsp;{cartPrices} . 00</p>
+          </div>
+          <div className="lg:px-3 relative top-32">
+            <button type="submit" className="bg-green-700 text-white py-2 px-4 rounded-md w-full">Check out</button>
           </div>
         </div>
       </section>
