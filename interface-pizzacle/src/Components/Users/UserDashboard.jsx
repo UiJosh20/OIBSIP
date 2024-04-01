@@ -37,12 +37,14 @@ const UserDashboard = () => {
             PIZZACLE
           </h1>
           <div className="space-x-10 flex justify-center">
+            <Link to='/user/product'>
             <Button
               variant="contained"
               className="!bg-green-700 !p-3 w-60 text-white"
             >
               Menu
             </Button>
+            </Link>
 
             <Button
               variant="contained"

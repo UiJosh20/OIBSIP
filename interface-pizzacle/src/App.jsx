@@ -14,9 +14,11 @@ import Product from './Components/Layout/Product'
 import UserForgotPassword from './Components/Users/UserForgotPassword'
 import UserVeriyOTP from './Components/Users/UserVeriyOTP'
 import UserCreateNewPassword from './Components/Users/UserCreateNewPassword'
-import Description from './Components/Layout/Description'
+
 import ProductDescription from './Components/Users/ProductDescription'
 import UserCart from './Components/Users/UserCart'
+import UserProduct from './Components/Users/UserProduct'
+import UserCheckout from './Components/Users/UserCheckout'
 
 
 function App() {
@@ -31,7 +33,6 @@ function App() {
           <Route path='/' element={<Navigate to='/home' />} />
           <Route path='/home' element={<Home />} />
           <Route path='/product' element={<Product />} />
-          <Route path='/description/:id' element={<Description />} />
         </Route>
 
         {/* user page */}
@@ -42,9 +43,11 @@ function App() {
         <Route path='/user/verifyOTP' element={<UserVeriyOTP />} />
         <Route path='/user/createNewPassword' element={<UserCreateNewPassword />} />
 
+          <Route path='/user/checkout' element={<UserCheckout />} />
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
           <Route path='/user/dashboard' element={<UserDashboard />} />
+          <Route path='/user/product' element={<UserProduct />} />
           <Route path='/user/description/:id' element={<ProductDescription/>} />
           <Route path='/user/cart' element={<UserCart />} />
         </Route>

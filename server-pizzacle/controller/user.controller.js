@@ -531,6 +531,11 @@ const deleteCartItem = (req, res) => {
   });
 };
 
+const checkOut = ( req, res)=> {
+  
+}
+
+
 module.exports = {
   userRegister,
   userLogin,
@@ -543,4 +548,5 @@ module.exports = {
   userCart,
   cartDisplay,
   deleteCartItem,
+  checkOut,
 };

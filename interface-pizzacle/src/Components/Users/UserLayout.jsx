@@ -15,7 +15,7 @@ const UserLayout = () => {
       if (!token) {
         setLoading(false);
         navigate("/user/login");
-        return; // Exit early if token is not present
+        return; 
       }
 
       axios
@@ -26,7 +26,7 @@ const UserLayout = () => {
             setTokenMatch(true);
           } else {
             console.log("Token doesn't match");
-            setLoading(false); // Set loading to false regardless of token match
+            setLoading(false);
             setTokenMatch(false);
             navigate("/user/login");
           }

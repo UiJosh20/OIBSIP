@@ -29,7 +29,7 @@ const Product = () => {
           </div>
           <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
           {pizza.map((pizza)=>(
-                <Link to={`/description/${pizza.id}`}  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
+                <Link to="/user/login"  key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
                   <img
                     className="w-full"
                     src={pizza.image_URL}

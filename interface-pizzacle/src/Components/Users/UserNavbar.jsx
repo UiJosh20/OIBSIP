@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -11,37 +11,36 @@ import { Badge } from "@mui/material";
 const UserNavbar = () => {
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
+  const navigate = useNavigate();
   const cartDisplayURL = "http://localhost:3000/user/displayCart";
   const [cartBadge, setCartBadge] = useState("");
 
-
-    useEffect(() => {
-      const fetchCartItems = () => {
-        axios
-          .get(cartDisplayURL, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
-          .then((res) => {
-            setCartBadge(res.data.items.length);
-          })
-          .catch((error) => {
-            console.error("Error fetching cart items:", error);
-          });
-      };
-      fetchCartItems();
-      const interval = setInterval(fetchCartItems, 1000);
-      return () => clearInterval(interval);
-    }, []);
-
-
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+  useEffect(() => {
+    const fetchCartItems = () => {
+      axios
+        .get(cartDisplayURL, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          setCartBadge(res.data.items.length);
+        })
+        .catch((error) => {
+          console.error("Error fetching cart items:", error);
+        });
     };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
+    fetchCartItems();
+    const interval = setInterval(fetchCartItems, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -71,6 +70,10 @@ const UserNavbar = () => {
       children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
     };
   }
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/user/login");
+  };
 
   return (
     <>
@@ -94,14 +97,21 @@ const UserNavbar = () => {
             <button>Search</button>
           </span>
 
-          <div className="space-x-10 flex items-center">
+          <div className="space-x-8 flex items-center">
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">shopping_cart</span>
               <span>Cart</span>
               {cartBadge > 0 && (
-                <Badge badgeContent={cartBadge}  color="success" className="ms-2">
-                </Badge>
+                <Badge
+                  badgeContent={cartBadge}
+                  color="success"
+                  className="ms-2"
+                ></Badge>
               )}
+            </Link>
+            <Link to="/user/product" className="flex items-center gap-2">
+              <span class="material-symbols-outlined">restaurant_menu</span>
+              <span>Menu</span>
             </Link>
             <Link to="/user/cart" className="flex items-center gap-2">
               <span class="material-symbols-outlined">help</span>
@@ -134,7 +144,7 @@ const UserNavbar = () => {
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>Orders</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={logOut}>Logout</MenuItem>
             </Menu>
           </div>
         </div>
@@ -171,7 +181,7 @@ const UserNavbar = () => {
           <MenuItem onClick={handleClose}>Profile</MenuItem>
           <MenuItem onClick={handleClose}>Orders</MenuItem>
           <MenuItem onClick={handleClose}>Help</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={logOut}>Logout</MenuItem>
         </Menu>
       </nav>
     </>
