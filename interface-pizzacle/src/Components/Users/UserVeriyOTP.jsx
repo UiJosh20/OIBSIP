@@ -6,12 +6,12 @@ import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const UserVeriyOTP = () => {
-  const deployedLink = "https://oibsip-90i2.onrender.com";
+
 
   const navigate = useNavigate();
   const [buttonText, setButtonText] = useState("Verify OTP");
 
-  const URL = `${deployedLink}/user/verifyOtp`;
+  const URL = `https://oibsip-90i2.onrender.com/user/verifyOtp`;
 
   const { handleChange, handleSubmit, values, errors } = useFormik({
     initialValues: {

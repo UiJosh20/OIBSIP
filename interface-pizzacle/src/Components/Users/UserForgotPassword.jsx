@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserForgotPassword = () => {
-  const deployedLink = "https://oibsip-90i2.onrender.com"
+  
   const navigate = useNavigate();
-  const URL = `${deployedLink}/user/forgot`;
+  const URL = `https://oibsip-90i2.onrender.com/user/forgot`;
   const [buttonText, setButtonText] = useState("Send OTP");
 
   const { handleChange, handleSubmit, values, errors } = useFormik({

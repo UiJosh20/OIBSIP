@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 
 const UserCreateNewPassword = () => {
-  const deployedLink = "https://oibsip-90i2.onrender.com";
+  
   const navigate = useNavigate();
-  const URL = `${deployedLink}/user/createNewPassword`;
+  const URL = `https://oibsip-90i2.onrender.com/user/createNewPassword`;
   const [buttonText, setButtonText] = useState("Create new password");
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginError, setLoginError] = useState(null);

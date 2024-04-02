@@ -4,10 +4,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const UserProduct = () => {
-  const deployedLink = "https://oibsip-90i2.onrender.com";
+
 
   const [pizza, setPizza] = useState([]);
-  const menuURL = `${deployedLink}/user/pizzaMenu`;
+  const menuURL = `https://oibsip-90i2.onrender.com/user/pizzaMenu`;
 
   useEffect(() => {
     axios

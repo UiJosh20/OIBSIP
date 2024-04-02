@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const UserDashboard = () => {
-  const deployedLink = "https://oibsip-90i2.onrender.com"
+  
   const [tokenMatch, setTokenMatch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState([])
     const exploreRef = useRef(null);
-  const menuURL = `${deployedLink}/user/pizzaDashboard`;
+  const menuURL = `https://oibsip-90i2.onrender.com/user/pizzaDashboard`;
   const navigate = useNavigate();
   useEffect(() => {
 
