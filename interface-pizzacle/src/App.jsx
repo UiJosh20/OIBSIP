@@ -19,7 +19,7 @@ import UserCreateNewPassword from './Components/Users/UserCreateNewPassword'
 import ProductDescription from './Components/Users/ProductDescription'
 import UserCart from './Components/Users/UserCart'
 import UserProduct from './Components/Users/UserProduct'
-import UserCheckout from './Components/Users/UserCheckout'
+
 
 
 
@@ -44,7 +44,7 @@ function App() {
         <Route path='/user/verifyOTP' element={<UserVeriyOTP />} />
         <Route path='/user/createNewPassword' element={<UserCreateNewPassword />} />
 
-          <Route path='/user/checkout' element={<UserCheckout />} />
+          
         <Route path="/user" element={<UserLayout />}>
           <Route path='/user' element={<Navigate to="/user/dashboard" />} />
           <Route path='/user/dashboard' element={<UserDashboard />} />
