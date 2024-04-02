@@ -169,6 +169,13 @@ const UserNavbar = () => {
           <span class="material-symbols-outlined">search</span>
           <Link to="/user/cart">
             <span class="material-symbols-outlined">shopping_cart</span>
+            {cartBadge > 0 && (
+                <Badge
+                  badgeContent={cartBadge}
+                  color="success"
+                  className="ms-2"
+                ></Badge>
+              )}
           </Link>
           <Stack direction="row" spacing={2}>
             <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />

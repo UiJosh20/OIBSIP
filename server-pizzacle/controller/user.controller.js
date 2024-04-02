@@ -447,10 +447,7 @@ const sideDish = [
     price: "20",
     image_URL: "",
   },
-];
-
-const drinks = [
-  {
+    {
     id: 1,
     name: "Coca Cola",
     description: "A carbonated soft drink",
@@ -479,6 +476,8 @@ const drinks = [
     image_URL: "",
   },
 ];
+
+
 const pizzaMenu = (req, res) => {
   res.send(pizzaList);
 };
@@ -615,8 +614,8 @@ const checkOut = (req, res) => {
     line_items: lineItems,
     payment_method_types: ['card'],
     mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'http://localhost:3000/cancel',
+    success_url: 'https://oibsip-90i2.onrender.com/success',
+    cancel_url: 'https://oibsip-90i2.onrender.com/cancel',
   })
   .then(session => {
     res.status(200).json({ sessionId: session.id });

@@ -5,7 +5,6 @@ import Home from "./Components/Layout/Home";
 import UserLayout from "./Components/Users/UserLayout";
 import UserRegister from "./Components/Users/UserRegister";
 import UserDashboard from "./Components/Users/UserDashboard";
-
 import { UserLogin } from "./Components/Users/UserLogin";
 import AdminLayout from "./Components/Admin/AdminLayout";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
@@ -15,7 +14,6 @@ import Product from "./Components/Layout/Product";
 import UserForgotPassword from "./Components/Users/UserForgotPassword";
 import UserVeriyOTP from "./Components/Users/UserVeriyOTP";
 import UserCreateNewPassword from "./Components/Users/UserCreateNewPassword";
-
 import ProductDescription from "./Components/Users/ProductDescription";
 import UserCart from "./Components/Users/UserCart";
 import UserProduct from "./Components/Users/UserProduct";
@@ -57,7 +55,6 @@ function App() {
         {/* Admin page */}
 
         <Route path="/admin/login" element={<AdminLogin />} />
-
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
