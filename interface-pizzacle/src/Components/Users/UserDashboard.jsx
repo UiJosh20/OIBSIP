@@ -11,7 +11,7 @@ const UserDashboard = () => {
 
 
 
-  const menuURL = 'http://localhost:3000/user/pizzaMenu';
+  const menuURL = 'http://localhost:3000/user/pizzaDashboard';
   const navigate = useNavigate();
   useEffect(() => {
 
@@ -57,8 +57,9 @@ const UserDashboard = () => {
         </main>
         <div ref={exploreRef}>
           <main className="bg-white lg:mt-10">
-            <div className="bg-green-900 w-full p-2 text-white text-center">
+            <div className="bg-green-900 w-full p-2 text-white text-center flex justify-between lg:px-10">
               <p>You have a big appetite?</p>
+              <Link to="/user/product">See more</Link>
             </div>
             <div className=" h-fit flex justify-center flex-wrap lg:px-7 lg:bg-white bg-gray-200 px-4 lg:py-10 py-3 gap-5">
             {menu.map((pizza, i) => (

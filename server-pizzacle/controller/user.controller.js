@@ -354,6 +354,63 @@ const pizzaList = [
   },
 ];
 
+const pizzaDashboard = [
+  {
+    id: 1,
+    name: "Margherita",
+    description:
+      "A classic pizza with tomato sauce, mozzarella cheese, and basil.",
+    price: 10,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png",
+  },
+  {
+    id: 2,
+    name: "Pepperoni",
+    description: "A pizza with tomato sauce, mozzarella cheese, and pepperoni.",
+    price: 12,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+  },
+  {
+    id: 3,
+    name: "Hawaiian",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and ham and pineapple.",
+    price: 15,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711025368/pizzacle/hyk9ohyu2yjhqypet593.png",
+  },
+  {
+    id: 4,
+    name: "Veggie",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various vegetables.",
+    price: 13,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019366/pizzacle/ubeeehds8jfhvcbjqyb6.png",
+  },
+  {
+    id: 5,
+    name: "Meat Lovers",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and various meats.",
+    price: 14,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711025368/pizzacle/hyk9ohyu2yjhqypet593.png",
+  },
+  {
+    id: 6,
+    name: "Cheese",
+    description:
+      "A pizza with tomato sauce, mozzarella cheese, and extra cheese.",
+    price: 11,
+    image_URL:
+      "https://res.cloudinary.com/dubaep0qz/image/upload/v1711019363/pizzacle/l52iwm6t3jmf1osobn47.png",
+  },
+ 
+];
+
 const sideDish = [
   {
     id: 1,
@@ -425,6 +482,11 @@ const drinks = [
 const pizzaMenu = (req, res) => {
   res.send(pizzaList);
 };
+
+const pizzaDash = (req, res) => {
+  res.send(pizzaDashboard);
+};
+
 const pizzaDisplay = (req, res) => {
   const id = parseInt(req.params.id);
   const pizza = pizzaList.find((pizza) => pizza.id === id);
@@ -565,6 +627,14 @@ const checkOut = (req, res) => {
   });
 };
 
+const successController = (req, res) => {
+  res.send( `
+  <section style="background-color:black; color:white; text-align:center; display:flex; justify-content:center; align-items:center; margin:0px; height:100vh;">
+  <h1>Payment successful your order is being processed!</h2>
+  </section>
+  ` );
+};
+
 
 module.exports = {
   userRegister,
@@ -574,9 +644,11 @@ module.exports = {
   createNewPassword,
   verifyToken,
   pizzaMenu,
+  pizzaDash,
   pizzaDisplay,
   userCart,
   cartDisplay,
   deleteCartItem,
   checkOut,
+  successController,
 };

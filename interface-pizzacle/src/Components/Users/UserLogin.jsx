@@ -85,7 +85,7 @@ export const UserLogin = () => {
                         </div> 
                         <form onSubmit={handleSubmit} className="lg:p-2 p-5">
                             <div className="border flex items-center bg-white p-2 mb-3 rounded-md outline-1 outline-slate-400">
-                                <input type="email" placeholder='Email Address' onChange={handleChange} name="email" value={values.email} className="w-full bg-none outline-none text-black" />
+                                <input type="email" placeholder='Email Address' onChange={handleChange} name="email" value={values.email} className="w-full bg-none outline-none text-black" autoFocus/>
                                 <span className="material-symbols-outlined text-black">
                                     person
                                 </span>
