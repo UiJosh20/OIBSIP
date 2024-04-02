@@ -21,8 +21,9 @@ const style = {
 
 
 const UserCart = () => {
-  const cartDisplayURL = "http://localhost:3000/user/displayCart";
-  const paymentUrl =  "http://localhost:3000/user/checkout"
+  const deployedLink = "https://oibsip-90i2.onrender.com"
+  const cartDisplayURL = `${deployedLink}/user/displayCart`;
+  const paymentUrl =  `${deployedLink}/user/checkout`
   const [cartData, setCartData] = useState(null);
   const [cartAmount, setCartAmount] = useState(0);
   const [cartPrices, setCartPrices] = useState(0);
@@ -60,7 +61,7 @@ const UserCart = () => {
 
   const handleDeleteItemClick = (productId) => {
     axios
-      .delete(`http://localhost:3000/user/cart/${productId}`, {
+      .delete(`${deployedLink}/user/cart/${productId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -6,7 +6,8 @@ import { useState } from "react";
 import Alert from '@mui/material/Alert';
 
 const AdminLogin = () => {
-  const URL = "http://localhost:3000/admin/login";
+  const deployedLink = "https://oibsip-90i2.onrender.com"
+  const URL = `${deployedLink}/admin/login`;
         const [showPassword, setShowPassword] = useState(false);
         const [loggingIn, setLoggingIn] = useState(false);
         const [loginSuccess, setLoginSuccess] = useState(false);

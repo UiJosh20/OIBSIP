@@ -14,12 +14,13 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 const ProductDescription = () => {
+  const deployedLink = "https://oibsip-90i2.onrender.com"
   const { id } = useParams();
-  const menuURL = "http://localhost:3000/user/pizzaMenu";
-  const cartURL = "http://localhost:3000/user/cart";
+  const menuURL = `${deployedLink}/user/pizzaMenu`;
+  const cartURL = `${deployedLink}/user/cart`;
   const statesAPI =
     "https://api.census.gov/data/2019/acs/acs1?get=NAME&for=state:*";
-  const TokenURL = "http://localhost:3000/user/verifyToken";
+  const TokenURL = `${deployedLink}/user/verifyToken`;
 
 
   const [description, setPizzaDescription] = useState([]);

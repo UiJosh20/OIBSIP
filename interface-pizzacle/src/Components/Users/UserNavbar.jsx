@@ -9,10 +9,11 @@ import axios from "axios";
 import { Badge } from "@mui/material";
 
 const UserNavbar = () => {
+  const deployedLink = "https://oibsip-90i2.onrender.com"
   const firstName = localStorage.getItem("firstName");
   const lastName = localStorage.getItem("lastName");
   const navigate = useNavigate();
-  const cartDisplayURL = "http://localhost:3000/user/displayCart";
+  const cartDisplayURL = `${deployedLink}/user/displayCart`;
   const [cartBadge, setCartBadge] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 

@@ -4,7 +4,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const UserLayout = () => {
-  const TokenURL = "http://localhost:3000/user/verifyToken";
+  const deployedLink = "https://oibsip-90i2.onrender.com"
+  const TokenURL = `${deployedLink}/user/verifyToken`;
   const [loading, setLoading] = useState(true);
   const [tokenMatch, setTokenMatch] = useState(false);
   const navigate = useNavigate();

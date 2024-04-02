@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 
 const Product = () => {
   const [pizza, setPizza] = useState([]);
-  const menuURL = 'http://localhost:3000/user/pizzaMenu';
+  const deployedLink = "https://oibsip-90i2.onrender.com"
+  const menuURL = `${deployedLink}/user/pizzaMenu`;
+  
 
 
 
