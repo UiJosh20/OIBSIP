@@ -31,10 +31,10 @@ const UserDashboard = () => {
     <>
       <section className="bg-gray-100 h-full lg:px-5 lg:py-5">
         <main className="bg-white lg:p-20 p-10 pexels justify-center">
-          <h1 className="landingText text-white text-center mt-10 lg:mb-10 mb-20">
+          <h1 className="landingText text-white text-center lg:mt-10 lg:mb-10 mt-20">
             PIZZACLE
           </h1>
-          <div className="space-x-10 flex justify-center lg:block hidden">
+          <div className="space-x-10  justify-center lg:flex hidden">
             <Link to='/user/product'>
             <Button
               variant="contained"
