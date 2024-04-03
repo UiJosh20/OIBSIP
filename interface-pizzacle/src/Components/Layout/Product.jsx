@@ -23,7 +23,7 @@ const Product = () => {
 
   return (
     <>
-      <section className="bg-gray-200 h-full px-10 py-5">
+      <section className="bg-gray-200 h-full lg:px-10 lg:py-5 px-5 py-3">
         <main className="bg-white">
           <div className="bg-green-900 w-full p-2 text-white text-center">
             <p>Pizza with different flavour</p>
