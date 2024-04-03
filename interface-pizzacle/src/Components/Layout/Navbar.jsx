@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
- 
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -54,9 +54,15 @@ const Navbar = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Orders</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem>
+                <Link to="/blog">Blog</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/product">Products</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to="/user/login">Login</Link>
+              </MenuItem>
             </Menu>
           </div>
         </div>
@@ -78,18 +84,6 @@ const Navbar = () => {
           </Link>
         </div>
       </nav>
-      {/* <nav className=" flex lg:px-10 lg:py-4 items-center justify-between border-t-2 border-green-700 bg-black text-white fixed w-full z-50">
-        <Link to="/">
-          <h1 className="logop">PIZZACLE</h1>
-        </Link>
-        <ul className="flex gap-12 list-none items-center ">
-          <Link to='/blog' className="homelink">Blog</Link>
-          <Link to='/user/product' className="homelink">Our product</Link>
-          <Link to='/user/register' className="homelink">Become a customer</Link>
-          <Link to='/user/login' className="btn bg-green-700 p-2 w-20 rounded-md text-center">Login</Link>
-        </ul>
-
-      </nav> */}
     </>
   );
 };

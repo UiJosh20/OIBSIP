@@ -28,7 +28,7 @@ const UserProduct = () => {
           <div className="bg-green-900 w-full p-2 text-white text-center">
             <p>Pizza with different flavour</p>
           </div>
-          <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
+          <div className=" h-fit flex justify-center flex-wrap lg:px-7 lg:py-10 gap-5 px-3 py-5">
             {pizza.map((pizza, i) => (
               <Link
                 to={`/user/description/${i}`}
