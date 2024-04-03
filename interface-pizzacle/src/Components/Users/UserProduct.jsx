@@ -52,42 +52,7 @@ const UserProduct = () => {
           </div>
         </main>
 
-        <main className="bg-white mt-10">
-          <div className="bg-green-900 w-full py-2 px-10 text-white flex justify-between">
-            <p>You want to step down your meal?</p>
-          </div>
-          <div className=" h-fit flex justify-center flex-wrap px-7 py-10 gap-5">
-            {/* {pizza.drinks && pizza.drinks.map((pizza) => (
-                  <Link key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
-                    <img
-                      className="w-full"
-                      src={pizza.image_URL}
-                      alt={pizza.name}
-                    />
-                    <div className="px-6 py-4">
-                      <div className="font-bold text-xl mb-2">{pizza.name}</div>
-                      <p className="text-gray-700 text-base">{pizza.description}</p>
-                      <p className="text-white text-base bg-green-700 p-2 w-32 rounded-md text-center my-5">Price: ${pizza.price}</p>
-                    </div>
-                  </Link>
-                ))}
-  
-                {pizza.sideDish && pizza.sideDish.map((pizza) => (
-                  <Link key={pizza.id} className="max-w-sm rounded overflow-hidden shadow-lg w-full">
-                    <img
-                      className="w-full"
-                      src={pizza.image_URL}
-                      alt={pizza.name}
-                    />
-                    <div className="px-6 py-4">
-                      <div className="font-bold text-xl mb-2">{pizza.name}</div>
-                      <p className="text-gray-700 text-base">{pizza.description}</p>
-                      <p className="text-white text-base bg-green-700 p-2 w-32 rounded-md text-center my-5">Price: ${pizza.price}</p>
-                    </div>
-                  </Link>
-                ))} */}
-          </div>
-        </main>
+      
       </section>
     </>
   );
