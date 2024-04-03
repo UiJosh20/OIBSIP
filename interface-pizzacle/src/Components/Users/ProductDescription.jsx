@@ -185,7 +185,7 @@ const ProductDescription = () => {
             </div>
           </div>
         </main>
-        <main className="bg-white  w-96">
+        <main className="bg-white  lg:w-96 w-full lg:px-2 px-5">
           <div className="border-b border-gray-200 py-3 px-5">
             <p>DELIVERY</p>
           </div>
