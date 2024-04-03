@@ -34,11 +34,11 @@ const UserDashboard = () => {
           <h1 className="landingText text-white text-center mt-10 lg:mb-10 mb-20">
             PIZZACLE
           </h1>
-          <div className="space-x-10 flex justify-center">
+          <div className="space-x-10 flex justify-center lg:block hidden">
             <Link to='/user/product'>
             <Button
               variant="contained"
-              className="!bg-green-700 !p-3  text-white"
+              className="!bg-green-700 !p-3 w-60 text-white"
             >
               Menu
             </Button>
@@ -47,7 +47,7 @@ const UserDashboard = () => {
             <Button
               variant="contained"
               onClick={handleExploreClick}
-              className="!bg-white  !p-3  !text-black"
+              className="!bg-white  !p-3 w-60 !text-black"
             >
               Explore
             </Button>
