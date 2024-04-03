@@ -197,9 +197,6 @@ const UserNavbar = () => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>Orders</MenuItem>
-          <MenuItem onClick={handleClose}>Help</MenuItem>
           <MenuItem onClick={logOut}>Logout</MenuItem>
         </Menu>
       </nav>
