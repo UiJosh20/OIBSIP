@@ -38,7 +38,7 @@ const UserDashboard = () => {
             <Link to='/user/product'>
             <Button
               variant="contained"
-              className="!bg-green-700 !p-3 w-60 text-white"
+              className="!bg-green-700 !p-3  text-white"
             >
               Menu
             </Button>
@@ -47,7 +47,7 @@ const UserDashboard = () => {
             <Button
               variant="contained"
               onClick={handleExploreClick}
-              className="!bg-white  !p-3 w-96 !text-black"
+              className="!bg-white  !p-3  !text-black"
             >
               Explore
             </Button>
