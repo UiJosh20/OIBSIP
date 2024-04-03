@@ -55,7 +55,7 @@ const Navbar = () => {
               }}
             >
               <MenuItem onClick={handleClose}>
-                <Link to="/blog" onClick={handleClose}>Blog</Link>
+                <Link to="/blog">Blog</Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link to="/product">Products</Link>
