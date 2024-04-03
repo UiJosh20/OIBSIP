@@ -47,7 +47,7 @@ const UserDashboard = () => {
             <Button
               variant="contained"
               onClick={handleExploreClick}
-              className="!bg-white  !p-3 w-60 !text-black"
+              className="!bg-white  !p-3 w-96 !text-black"
             >
               Explore
             </Button>
