@@ -81,14 +81,7 @@ const UserDashboard = () => {
           </main>
         </div>
 
-        <main className="bg-white mt-10">
-          <div className="bg-green-900 w-full py-2 px-10 text-white flex justify-between">
-            <p>You want to step down your meal?</p>
-
-            <Link to="/user/product/all">See more</Link>
-          </div>
-          <div className="h-screen "></div>
-        </main>
+       
       </section>
     </>
   );
