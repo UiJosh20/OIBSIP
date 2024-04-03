@@ -54,14 +54,14 @@ const Navbar = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem>
+              <MenuItem onClick={handleClose}>
                 <Link to="/blog" onClick={handleClose}>Blog</Link>
               </MenuItem>
-              <MenuItem>
-                <Link to="/product" onClick={handleClose}>Products</Link>
+              <MenuItem onClick={handleClose}>
+                <Link to="/product">Products</Link>
               </MenuItem>
-              <MenuItem>
-                <Link to="/user/login" onClick={handleClose}>Login</Link>
+              <MenuItem onClick={handleClose}>
+                <Link to="/user/login">Login</Link>
               </MenuItem>
             </Menu>
           </div>
