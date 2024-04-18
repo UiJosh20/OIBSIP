@@ -44,7 +44,7 @@ Pizzacle is a full-stack web application designed to simplify the process of ord
   - RESTful API design principles
 
   ## Deployment
-https://pizzacle.vercel.app/
+    - https://pizzacle.vercel.app/
 
   ## Author
 - Name: Oluwaseun Adeyeri
